@@ -10,21 +10,27 @@ import Foundation
 
 class Alarm {
     
-    private var hours: UInt8
-    private var minutes: UInt8
+    private var hours: String
+    private var minutes: String
+    private var mode: String
     
-    init(hours: UInt8, minutes: UInt8) {
+    init(hours: String, minutes: String, mode: String) {
         self.hours = hours
         self.minutes = minutes
+        self.mode = mode
     }
     
-    func getHours() -> UInt8 {
+    func getHours() -> String {
         
         return self.hours
     }
     
-    func getMinutes() -> UInt8 {
+    func getMinutes() -> String {
         
         return self.minutes
+    }
+    
+    func getMode() -> String {
+        return self.mode
     }
 }

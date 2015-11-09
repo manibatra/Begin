@@ -13,6 +13,8 @@ class ViewController: UIViewController  {
     
     private var halfCircularProgress: KYCircularProgress!
     private var progress: Double = 0.0
+    private var currentAlarm: Alarm!
+    private var alarmOn = 1
     
     @IBOutlet weak var ForceTester: UILabel!
     @IBOutlet weak var ForceValue: UILabel!
@@ -28,6 +30,7 @@ class ViewController: UIViewController  {
             
         }
         
+        currentAlarm = Alarm.init(hours: "5", minutes: "35", mode: "PM")
         configureHalfCircularProgress()
         updateProgress(0)
         
@@ -35,7 +38,7 @@ class ViewController: UIViewController  {
         
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0)) { // 1
             dispatch_async(dispatch_get_main_queue()) { // 2
-                let timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateLabel", userInfo: nil, repeats: true)
+                let timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "checkAlarm", userInfo: nil, repeats: true)
                 timer.fire()
             }
         }
@@ -86,21 +89,40 @@ class ViewController: UIViewController  {
         
     }
     
-    func updateLabel() {
+    func checkAlarm() {
         
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), {
             
             let date = NSDate()
             let dateformatter = CFDateFormatterCreate(nil, CFLocaleCopyCurrent(), CFDateFormatterStyle.ShortStyle, CFDateFormatterStyle.ShortStyle)
             let time = CFDateFormatterCreateStringWithDate(nil, dateformatter, date)
-            dispatch_async(dispatch_get_main_queue(), {
+            let timeString   = (time as String).componentsSeparatedByString(", ")[1]
+            let hours = timeString.componentsSeparatedByString(":")[0]
+            let minutes = timeString.componentsSeparatedByString(":")[1].componentsSeparatedByString(" ")[0]
+            let mode = timeString.componentsSeparatedByString(":")[1].componentsSeparatedByString(" ")[1]
+            if hours == self.currentAlarm.getHours() && minutes == self.currentAlarm.getMinutes() && mode == self.currentAlarm.getMode() && self.alarmOn == 1 {
                 
-                self.timeDisplay.text = (time  as String).componentsSeparatedByString(", ")[1]
+                self.alarmOn = 0
+    
+                let alert = UIAlertController (title: "Alarm Time", message: "Wakey Wakey!!", preferredStyle: UIAlertControllerStyle.Alert)
                 
                 
-            })
-            
-            
+                
+                
+                alert.addAction(UIAlertAction(title: "Shut Up", style: UIAlertActionStyle.Cancel, handler: { (UIAlertAction) -> Void in
+                    
+                }))
+
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    
+                    self.presentViewController(alert, animated: true, completion: nil)
+
+                    
+                })
+                
+            }
             
             
         })
