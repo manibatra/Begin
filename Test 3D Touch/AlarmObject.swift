@@ -23,7 +23,7 @@ class Alarm {
         return self.hours
     }
     
-    func getMinutes() -> UInt8 {
+    func getMinutes() -> UInt8 {
         
         return self.minutes
     }
