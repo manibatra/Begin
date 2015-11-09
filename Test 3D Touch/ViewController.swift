@@ -30,7 +30,8 @@ class ViewController: UIViewController  {
             
         }
         
-        currentAlarm = Alarm.init(hours: "5", minutes: "35", mode: "PM")
+        currentAlarm = Alarm.init(hours: "5", minutes: "38", mode: "PM")
+        timeDisplay.text = currentAlarm.description()
         configureHalfCircularProgress()
         updateProgress(0)
         

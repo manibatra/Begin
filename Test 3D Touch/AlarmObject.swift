@@ -31,6 +31,12 @@ class Alarm {
     }
     
     func getMode() -> String {
+        
         return self.mode
+    }
+    
+    func description() -> String {
+        
+        return self.hours + " : " + self.minutes + "  " + self.mode
     }
 }
