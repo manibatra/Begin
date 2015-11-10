@@ -24,6 +24,10 @@ class ViewController: UIViewController  {
     @IBOutlet weak var timeDisplayMode: UILabel!
     @IBOutlet weak var timeDisplayView: UIStackView!
     
+    var timeDisplayHoursFrame: CGRect!
+    var timeDisplayMinutesFrame: CGRect!
+    var timeDisplayModeFrame: CGRect!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -33,10 +37,15 @@ class ViewController: UIViewController  {
             
         }
         
-        currentAlarm = Alarm.init(hours: "5", minutes: "38", mode: "PM")
+        currentAlarm = Alarm.init(hours: "5", minutes: "00", mode: "PM")
         timeDisplayHours.text = currentAlarm.getHours()
         timeDisplayMinutes.text = currentAlarm.getMinutes()
         timeDisplayMode.text = currentAlarm.getMode()
+        
+        timeDisplayHoursFrame = CGRectMake(timeDisplayView.bounds.origin.x, timeDisplayView.bounds.origin.y, timeDisplayHours.bounds.width, timeDisplayHours.bounds.height)
+        timeDisplayMinutesFrame = CGRectMake(timeDisplayMinutes.frame.origin.x + timeDisplayView.frame.origin.x, timeDisplayMinutes.frame.origin.y + timeDisplayView.frame.origin.y, timeDisplayMinutes.frame.width, timeDisplayMinutes.frame.height)
+        timeDisplayModeFrame = CGRectMake(timeDisplayMode.frame.origin.x + timeDisplayView.frame.origin.x, timeDisplayMode.frame.origin.y + timeDisplayView.frame.origin.y, timeDisplayMode.frame.width, timeDisplayMode.frame.height)
+        
         configureHalfCircularProgress()
         updateProgress(0)
         
@@ -109,7 +118,7 @@ class ViewController: UIViewController  {
             if hours == self.currentAlarm.getHours() && minutes == self.currentAlarm.getMinutes() && mode == self.currentAlarm.getMode() && self.alarmOn == 1 {
                 
                 self.alarmOn = 0
-    
+                
                 let alert = UIAlertController (title: "Alarm Time", message: "Wakey Wakey!!", preferredStyle: UIAlertControllerStyle.Alert)
                 
                 
@@ -118,13 +127,13 @@ class ViewController: UIViewController  {
                 alert.addAction(UIAlertAction(title: "Shut Up", style: UIAlertActionStyle.Cancel, handler: { (UIAlertAction) -> Void in
                     
                 }))
-
+                
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     
                     
                     self.presentViewController(alert, animated: true, completion: nil)
-
+                    
                     
                 })
                 
@@ -145,8 +154,50 @@ class ViewController: UIViewController  {
         updateProgress(0)
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
+        
+        for touch in touches {
+            
+            let touchPoint = touch.locationInView(self.view)
+            
+            if CGRectContainsPoint( CGRectMake(timeDisplayMode.frame.origin.x + timeDisplayView.frame.origin.x, timeDisplayMode.frame.origin.y + timeDisplayView.frame.origin.y, timeDisplayMode.frame.width, timeDisplayMode.frame.height), touchPoint) {
+                
+                if timeDisplayMode.text == "AM" {
+                    timeDisplayMode.text = "PM"
+                    break;
+                } else {
+                    timeDisplayMode.text = "AM"
+                    break;
+                }
+            } else if CGRectContainsPoint( CGRectMake(timeDisplayHours.frame.origin.x + timeDisplayView.frame.origin.x, timeDisplayHours.frame.origin.y + timeDisplayView.frame.origin.y, timeDisplayHours.frame.width, timeDisplayHours.frame.height), touchPoint) {
+                
+                var currentHours: Int = Int(timeDisplayHours.text!)!
+                currentHours = ((currentHours % 12) + 1)
+                timeDisplayHours.text = String(currentHours)
+                break;
+                
+            } else if CGRectContainsPoint( CGRectMake(timeDisplayMinutes.frame.origin.x + timeDisplayView.frame.origin.x, timeDisplayMinutes.frame.origin.y + timeDisplayView.frame.origin.y, timeDisplayMinutes.frame.width, timeDisplayMinutes.frame.height), touchPoint) {
+                
+                var currentMinutes: Int = Int(timeDisplayMinutes.text!)!
+                currentMinutes = ((currentMinutes  % 60) + 5)
+                if currentMinutes == 60 {
+                    timeDisplayMinutes.text = "00"
+                } else  {
+                    timeDisplayMinutes.text = String(format: "%02d", currentMinutes)
+                }
+                break;
+                
+            }
+            
+            
+            
+        }
+        
+        
+    }
+    
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         for touch in touches {
             
@@ -160,10 +211,7 @@ class ViewController: UIViewController  {
             }
             
             
-            
-            
         }
-        
         
     }
     
