@@ -19,7 +19,10 @@ class ViewController: UIViewController  {
     @IBOutlet weak var ForceTester: UILabel!
     @IBOutlet weak var ForceValue: UILabel!
     
-    @IBOutlet weak var timeDisplay: UILabel!
+    @IBOutlet weak var timeDisplayHours: UILabel!
+    @IBOutlet weak var timeDisplayMinutes: UILabel!
+    @IBOutlet weak var timeDisplayMode: UILabel!
+    @IBOutlet weak var timeDisplayView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +34,9 @@ class ViewController: UIViewController  {
         }
         
         currentAlarm = Alarm.init(hours: "5", minutes: "38", mode: "PM")
-        timeDisplay.text = currentAlarm.description()
+        timeDisplayHours.text = currentAlarm.getHours()
+        timeDisplayMinutes.text = currentAlarm.getMinutes()
+        timeDisplayMode.text = currentAlarm.getMode()
         configureHalfCircularProgress()
         updateProgress(0)
         
@@ -49,7 +54,7 @@ class ViewController: UIViewController  {
     
     private func configureHalfCircularProgress() {
         
-        let progressFrame = CGRectMake(0, timeDisplay.frame.origin.y + timeDisplay.frame.height, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)/4)
+        let progressFrame = CGRectMake(0, timeDisplayView.frame.origin.y + timeDisplayView.frame.height*2, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)/4)
         halfCircularProgress = KYCircularProgress(frame: progressFrame, showProgressGuide: true)
         
         let center = CGPoint(x: view.frame.midX, y: 140.0)

@@ -40,23 +40,46 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="buF-6u-zNH">
-                                <rect key="frame" x="134" y="51" width="333" height="146"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="223" ambiguous="YES" misplaced="YES" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Ny9-VC-OYj">
+                                <rect key="frame" x="171" y="106" width="257" height="48"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="746" ambiguous="YES" placeholderIntrinsicWidth="70" placeholderIntrinsicHeight="48" text="5              " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="140" translatesAutoresizingMaskIntoConstraints="NO" id="buF-6u-zNH">
+                                        <rect key="frame" x="0.0" y="0.0" width="70" height="48"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="40"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text=":" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m9X-Uc-RDi">
+                                        <rect key="frame" x="82" y="0.0" width="11" height="48"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="40"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" placeholderIntrinsicWidth="70" placeholderIntrinsicHeight="48" text="  38" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FVD-zG-Wia">
+                                        <rect key="frame" x="105" y="0.0" width="70" height="48"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="40"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" placeholderIntrinsicWidth="70" placeholderIntrinsicHeight="48" text="AM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zz1-75-gv7">
+                                        <rect key="frame" x="187" y="0.0" width="70" height="48"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="40"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="146" id="8nu-Y1-9ZN"/>
-                                    <constraint firstAttribute="width" constant="333" id="cc4-kl-Szz"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="40"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </stackView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="DSZ-zv-QMD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AxB-LA-WaI"/>
-                            <constraint firstItem="buF-6u-zNH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bPj-xZ-nLR"/>
+                            <constraint firstItem="Ny9-VC-OYj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kjt-wK-ZMu"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="DSZ-zv-QMD" secondAttribute="bottom" constant="219" id="rM9-gZ-PP1"/>
                             <constraint firstItem="2qv-5t-I5Y" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="s13-Ah-ZPJ"/>
                         </constraints>
@@ -66,7 +89,10 @@
                     <connections>
                         <outlet property="ForceTester" destination="2qv-5t-I5Y" id="0eT-Ku-gkK"/>
                         <outlet property="ForceValue" destination="DSZ-zv-QMD" id="ACk-5s-rfE"/>
-                        <outlet property="timeDisplay" destination="buF-6u-zNH" id="9Ys-Ch-Bve"/>
+                        <outlet property="timeDisplayHours" destination="buF-6u-zNH" id="C9q-8o-B28"/>
+                        <outlet property="timeDisplayMinutes" destination="FVD-zG-Wia" id="k0d-jU-WXQ"/>
+                        <outlet property="timeDisplayMode" destination="Zz1-75-gv7" id="hWf-4l-n18"/>
+                        <outlet property="timeDisplayView" destination="Ny9-VC-OYj" id="eSV-rn-FN5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
