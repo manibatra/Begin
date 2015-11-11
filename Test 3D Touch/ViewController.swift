@@ -24,9 +24,10 @@ class ViewController: UIViewController  {
     @IBOutlet weak var timeDisplayMode: UILabel!
     @IBOutlet weak var timeDisplayView: UIStackView!
     
-    var timeDisplayHoursFrame: CGRect!
-    var timeDisplayMinutesFrame: CGRect!
-    var timeDisplayModeFrame: CGRect!
+    @IBOutlet weak var hoursTouchBelow: UILabel!
+    @IBOutlet weak var minutesTouchBelow: UILabel!
+    @IBOutlet weak var touchBelowView: UIStackView!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,9 +43,6 @@ class ViewController: UIViewController  {
         timeDisplayMinutes.text = currentAlarm.getMinutes()
         timeDisplayMode.text = currentAlarm.getMode()
         
-        timeDisplayHoursFrame = CGRectMake(timeDisplayView.bounds.origin.x, timeDisplayView.bounds.origin.y, timeDisplayHours.bounds.width, timeDisplayHours.bounds.height)
-        timeDisplayMinutesFrame = CGRectMake(timeDisplayMinutes.frame.origin.x + timeDisplayView.frame.origin.x, timeDisplayMinutes.frame.origin.y + timeDisplayView.frame.origin.y, timeDisplayMinutes.frame.width, timeDisplayMinutes.frame.height)
-        timeDisplayModeFrame = CGRectMake(timeDisplayMode.frame.origin.x + timeDisplayView.frame.origin.x, timeDisplayMode.frame.origin.y + timeDisplayView.frame.origin.y, timeDisplayMode.frame.width, timeDisplayMode.frame.height)
         
         configureHalfCircularProgress()
         updateProgress(0)
@@ -63,7 +61,7 @@ class ViewController: UIViewController  {
     
     private func configureHalfCircularProgress() {
         
-        let progressFrame = CGRectMake(0, timeDisplayView.frame.origin.y + timeDisplayView.frame.height*2, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)/4)
+        let progressFrame = CGRectMake(0, touchBelowView.frame.origin.y + touchBelowView.frame.height*2, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)/4)
         halfCircularProgress = KYCircularProgress(frame: progressFrame, showProgressGuide: true)
         
         let center = CGPoint(x: view.frame.midX, y: 140.0)
@@ -207,6 +205,10 @@ class ViewController: UIViewController  {
                 
                 ForceValue.text = "\(touch.force)"
                 updateProgress(touch.force)
+                
+            } else if CGRectContainsPoint( CGRectMake(hoursTouchBelow.frame.origin.x + touchBelowView.frame.origin.x, hoursTouchBelow.frame.origin.y + touchBelowView.frame.origin.y, hoursTouchBelow.frame.width, hoursTouchBelow.frame.height), touchPoint) {
+                
+                print("You touch me at all the right places")
                 
             }
             
