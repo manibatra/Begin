@@ -15,6 +15,12 @@ class ViewController: UIViewController  {
     private var progress: Double = 0.0
     private var currentAlarm: Alarm!
     private var alarmOn = 1
+    private var touchCounter = 0
+    private var hoursCounter0: NSTimer!
+    private var hoursCounter1: NSTimer!
+    private var hoursCounter2: NSTimer!
+    
+    
     
     @IBOutlet weak var ForceTester: UILabel!
     @IBOutlet weak var ForceValue: UILabel!
@@ -27,7 +33,7 @@ class ViewController: UIViewController  {
     @IBOutlet weak var hoursTouchBelow: UILabel!
     @IBOutlet weak var minutesTouchBelow: UILabel!
     @IBOutlet weak var touchBelowView: UIStackView!
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,11 +49,9 @@ class ViewController: UIViewController  {
         timeDisplayMinutes.text = currentAlarm.getMinutes()
         timeDisplayMode.text = currentAlarm.getMode()
         
-        
         configureHalfCircularProgress()
         updateProgress(0)
         
-        // NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateProgress", userInfo: nil, repeats: true)
         
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0)) { // 1
             dispatch_async(dispatch_get_main_queue()) { // 2
@@ -102,6 +106,15 @@ class ViewController: UIViewController  {
         
     }
     
+    func updateLabel() {
+        
+        var currentHours: Int = Int(timeDisplayHours.text!)!
+        currentHours = ((currentHours % 12) + 1)
+        timeDisplayHours.text = String(currentHours)
+        
+        
+    }
+    
     func checkAlarm() {
         
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), {
@@ -147,9 +160,26 @@ class ViewController: UIViewController  {
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
+        print("the touch has ended")
+        
+        if(hoursCounter0 != nil) {
+            hoursCounter0.invalidate()
+            hoursCounter0 = nil
+        }
+        if(hoursCounter1 != nil) {
+            hoursCounter1.invalidate()
+            hoursCounter1 = nil
+        }
+        if(hoursCounter2 != nil) {
+            hoursCounter2.invalidate()
+            hoursCounter2 = nil
+        }
+        
+        
         self.ForceValue.text = "Return of the Jedi ?"
         self.progress = 0.0
         updateProgress(0)
+        
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -186,9 +216,12 @@ class ViewController: UIViewController  {
                 }
                 break;
                 
+            } else if CGRectContainsPoint( CGRectMake(hoursTouchBelow.frame.origin.x + touchBelowView.frame.origin.x, hoursTouchBelow.frame.origin.y + touchBelowView.frame.origin.y, hoursTouchBelow.frame.width, hoursTouchBelow.frame.height), touchPoint) {
+             
+                updateLabel()
+                
             }
-            
-            
+
             
         }
         
@@ -197,9 +230,13 @@ class ViewController: UIViewController  {
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
+        
         for touch in touches {
             
             let touchPoint = touch.locationInView(self.view)
+            
+            //print("the force in this one is : \(Double(touch.force))")
+            
             
             if CGRectContainsPoint(ForceTester.frame, touchPoint) {
                 
@@ -208,7 +245,65 @@ class ViewController: UIViewController  {
                 
             } else if CGRectContainsPoint( CGRectMake(hoursTouchBelow.frame.origin.x + touchBelowView.frame.origin.x, hoursTouchBelow.frame.origin.y + touchBelowView.frame.origin.y, hoursTouchBelow.frame.width, hoursTouchBelow.frame.height), touchPoint) {
                 
-                print("You touch me at all the right places")
+                switch Double(touch.force) {
+                    
+                case 0.0 ..< 2.22 :
+                    
+                    
+                    if (hoursCounter2 != nil) {
+                        hoursCounter2.invalidate()
+                        hoursCounter2 = nil
+                    }
+                    
+                    if (hoursCounter1 != nil) {
+                        hoursCounter1.invalidate()
+                        hoursCounter1 = nil
+                    }
+                    
+                    if (hoursCounter0 == nil) {
+                        hoursCounter0 = NSTimer.scheduledTimerWithTimeInterval(0.6, target: self, selector: "updateLabel", userInfo: nil, repeats: true)
+                    }
+                    
+                    break
+                    
+                case 2.22 ..< 4.44 :
+                    if (hoursCounter0 != nil) {
+                        hoursCounter0.invalidate()
+                        hoursCounter0 = nil
+                    }
+                    
+                    if (hoursCounter2 != nil) {
+                        hoursCounter2.invalidate()
+                        hoursCounter2 = nil
+                    }
+                    
+                    if (hoursCounter1 == nil) {
+                        hoursCounter1 = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: "updateLabel", userInfo: nil, repeats: true)
+                    }
+                    
+                    break
+                    
+                case 4.44 ... 6.67 :
+                    if (hoursCounter0 != nil) {
+                        hoursCounter0.invalidate()
+                        hoursCounter0 = nil
+                    }
+                    
+                    if (hoursCounter1 != nil) {
+                        hoursCounter1.invalidate()
+                        hoursCounter1 = nil
+                    }
+                    
+                    if (hoursCounter2 == nil) {
+                        hoursCounter2 = NSTimer.scheduledTimerWithTimeInterval(0.09, target: self, selector: "updateLabel", userInfo: nil, repeats: true)
+                    }
+                    
+                    break
+                default:
+                    break
+                    
+                }
+                
                 
             }
             
