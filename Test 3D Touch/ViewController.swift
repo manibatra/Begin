@@ -30,6 +30,7 @@ class ViewController: UIViewController  {
     @IBOutlet weak var timeDisplayMode: UILabel!
     @IBOutlet weak var timeDisplayView: UIStackView!
     
+    @IBOutlet weak var modeTouchBelow: UILabel!
     @IBOutlet weak var hoursTouchBelow: UILabel!
     @IBOutlet weak var minutesTouchBelow: UILabel!
     @IBOutlet weak var touchBelowView: UIStackView!
@@ -107,10 +108,37 @@ class ViewController: UIViewController  {
     }
     
     func updateLabel() {
+        var touchedLabel: UILabel!
+        if(hoursCounter0 != nil ) {
+            touchedLabel = hoursCounter0.userInfo as! UILabel
+            
+        } else if(hoursCounter1 != nil) {
+            touchedLabel = hoursCounter1.userInfo as! UILabel
+        } else if(hoursCounter2 != nil) {
+            touchedLabel = hoursCounter2.userInfo as! UILabel
+        }
+        var minuteFlag = 1
+        var format = "%1d"
         
-        var currentHours: Int = Int(timeDisplayHours.text!)!
-        currentHours = ((currentHours % 12) + 1)
-        timeDisplayHours.text = String(currentHours)
+        if touchedLabel == timeDisplayMinutes {
+            minuteFlag = 5
+            format = "%02d"
+        }
+        var current: Int = Int(touchedLabel.text!)!
+        current = ((current % (12 * minuteFlag)) + 1)
+        touchedLabel.text = String(format: format, current)
+        
+        
+    }
+    
+    func changeMode() {
+        
+        
+        if timeDisplayMode.text == "AM" {
+            timeDisplayMode.text = "PM"
+        } else {
+            timeDisplayMode.text = "AM"
+        }
         
         
     }
@@ -189,7 +217,7 @@ class ViewController: UIViewController  {
             
             let touchPoint = touch.locationInView(self.view)
             
-            if CGRectContainsPoint( CGRectMake(timeDisplayMode.frame.origin.x + timeDisplayView.frame.origin.x, timeDisplayMode.frame.origin.y + timeDisplayView.frame.origin.y, timeDisplayMode.frame.width, timeDisplayMode.frame.height), touchPoint) {
+            if CGRectContainsPoint( CGRectMake(timeDisplayMode.frame.origin.x + timeDisplayView.frame.origin.x, timeDisplayMode.frame.origin.y + timeDisplayView.frame.origin.y, timeDisplayMode.frame.width, timeDisplayMode.frame.height), touchPoint) || CGRectContainsPoint( CGRectMake(modeTouchBelow.frame.origin.x + touchBelowView.frame.origin.x, modeTouchBelow.frame.origin.y + touchBelowView.frame.origin.y, modeTouchBelow.frame.width, modeTouchBelow.frame.height), touchPoint) {
                 
                 if timeDisplayMode.text == "AM" {
                     timeDisplayMode.text = "PM"
@@ -217,11 +245,21 @@ class ViewController: UIViewController  {
                 break;
                 
             } else if CGRectContainsPoint( CGRectMake(hoursTouchBelow.frame.origin.x + touchBelowView.frame.origin.x, hoursTouchBelow.frame.origin.y + touchBelowView.frame.origin.y, hoursTouchBelow.frame.width, hoursTouchBelow.frame.height), touchPoint) {
-             
-                updateLabel()
+                
+                var current: Int = Int(timeDisplayHours.text!)!
+                current = ((current % 12) + 1)
+                timeDisplayHours.text = String(current)
+
+                
+            } else if CGRectContainsPoint( CGRectMake(minutesTouchBelow.frame.origin.x + touchBelowView.frame.origin.x, minutesTouchBelow.frame.origin.y + touchBelowView.frame.origin.y, minutesTouchBelow.frame.width, minutesTouchBelow.frame.height), touchPoint) {
+                
+                var current: Int = Int(timeDisplayMinutes.text!)!
+                current = ((current % 60) + 1)
+                timeDisplayMinutes.text = String(format:"%02d", current)
+                
                 
             }
-
+            
             
         }
         
@@ -243,7 +281,7 @@ class ViewController: UIViewController  {
                 ForceValue.text = "\(touch.force)"
                 updateProgress(touch.force)
                 
-            } else if CGRectContainsPoint( CGRectMake(hoursTouchBelow.frame.origin.x + touchBelowView.frame.origin.x, hoursTouchBelow.frame.origin.y + touchBelowView.frame.origin.y, hoursTouchBelow.frame.width, hoursTouchBelow.frame.height), touchPoint) {
+            } else if CGRectContainsPoint( CGRectMake(modeTouchBelow.frame.origin.x + touchBelowView.frame.origin.x, modeTouchBelow.frame.origin.y + touchBelowView.frame.origin.y, modeTouchBelow.frame.width, modeTouchBelow.frame.height), touchPoint) {
                 
                 switch Double(touch.force) {
                     
@@ -261,7 +299,7 @@ class ViewController: UIViewController  {
                     }
                     
                     if (hoursCounter0 == nil) {
-                        hoursCounter0 = NSTimer.scheduledTimerWithTimeInterval(0.6, target: self, selector: "updateLabel", userInfo: nil, repeats: true)
+                        hoursCounter0 = NSTimer.scheduledTimerWithTimeInterval(0.6, target: self, selector: "changeMode", userInfo: nil, repeats: true)
                     }
                     
                     break
@@ -278,7 +316,7 @@ class ViewController: UIViewController  {
                     }
                     
                     if (hoursCounter1 == nil) {
-                        hoursCounter1 = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: "updateLabel", userInfo: nil, repeats: true)
+                        hoursCounter1 = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: "changeMode", userInfo: nil, repeats: true)
                     }
                     
                     break
@@ -295,7 +333,7 @@ class ViewController: UIViewController  {
                     }
                     
                     if (hoursCounter2 == nil) {
-                        hoursCounter2 = NSTimer.scheduledTimerWithTimeInterval(0.09, target: self, selector: "updateLabel", userInfo: nil, repeats: true)
+                        hoursCounter2 = NSTimer.scheduledTimerWithTimeInterval(0.09, target: self, selector: "changeMode", userInfo: nil, repeats: true)
                     }
                     
                     break
@@ -303,6 +341,94 @@ class ViewController: UIViewController  {
                     break
                     
                 }
+
+                
+            }
+                
+            else {
+                
+                
+                var touchedLabel: UILabel!
+                touchedLabel = nil
+                
+                if CGRectContainsPoint( CGRectMake(hoursTouchBelow.frame.origin.x + touchBelowView.frame.origin.x, hoursTouchBelow.frame.origin.y + touchBelowView.frame.origin.y, hoursTouchBelow.frame.width, hoursTouchBelow.frame.height), touchPoint) {
+                    
+                    touchedLabel = timeDisplayHours
+                    
+                    
+                } else if CGRectContainsPoint( CGRectMake(minutesTouchBelow.frame.origin.x + touchBelowView.frame.origin.x, minutesTouchBelow.frame.origin.y + touchBelowView.frame.origin.y, minutesTouchBelow.frame.width, minutesTouchBelow.frame.height), touchPoint) {
+                    
+                    touchedLabel = timeDisplayMinutes
+                    
+                    
+                }
+                if touchedLabel != nil {
+                    
+                    
+                    
+                    switch Double(touch.force) {
+                        
+                    case 0.0 ..< 2.22 :
+                        
+                        
+                        if (hoursCounter2 != nil) {
+                            hoursCounter2.invalidate()
+                            hoursCounter2 = nil
+                        }
+                        
+                        if (hoursCounter1 != nil) {
+                            hoursCounter1.invalidate()
+                            hoursCounter1 = nil
+                        }
+                        
+                        if (hoursCounter0 == nil) {
+                            hoursCounter0 = NSTimer.scheduledTimerWithTimeInterval(0.6, target: self, selector: "updateLabel", userInfo: touchedLabel, repeats: true)
+                        }
+                        
+                        break
+                        
+                    case 2.22 ..< 4.44 :
+                        if (hoursCounter0 != nil) {
+                            hoursCounter0.invalidate()
+                            hoursCounter0 = nil
+                        }
+                        
+                        if (hoursCounter2 != nil) {
+                            hoursCounter2.invalidate()
+                            hoursCounter2 = nil
+                        }
+                        
+                        if (hoursCounter1 == nil) {
+                            hoursCounter1 = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: "updateLabel", userInfo: touchedLabel, repeats: true)
+                        }
+                        
+                        break
+                        
+                    case 4.44 ... 6.67 :
+                        if (hoursCounter0 != nil) {
+                            hoursCounter0.invalidate()
+                            hoursCounter0 = nil
+                        }
+                        
+                        if (hoursCounter1 != nil) {
+                            hoursCounter1.invalidate()
+                            hoursCounter1 = nil
+                        }
+                        
+                        if (hoursCounter2 == nil) {
+                            hoursCounter2 = NSTimer.scheduledTimerWithTimeInterval(0.09, target: self, selector: "updateLabel", userInfo: touchedLabel, repeats: true)
+                        }
+                        
+                        break
+                    default:
+                        break
+                        
+                    }
+                    
+                    
+                }
+                
+                
                 
                 
             }

@@ -164,6 +164,7 @@
                         <outlet property="ForceValue" destination="DSZ-zv-QMD" id="ACk-5s-rfE"/>
                         <outlet property="hoursTouchBelow" destination="ufd-Ze-bRx" id="5Rd-WF-kgf"/>
                         <outlet property="minutesTouchBelow" destination="F6O-ea-3wF" id="VCA-4p-mvY"/>
+                        <outlet property="modeTouchBelow" destination="HZb-yB-dsL" id="3ES-Uy-AJX"/>
                         <outlet property="timeDisplayHours" destination="buF-6u-zNH" id="C9q-8o-B28"/>
                         <outlet property="timeDisplayMinutes" destination="FVD-zG-Wia" id="k0d-jU-WXQ"/>
                         <outlet property="timeDisplayMode" destination="Zz1-75-gv7" id="hWf-4l-n18"/>
