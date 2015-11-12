@@ -53,7 +53,7 @@ class ViewController: UIViewController  {
             
         }
         
-        currentAlarm = Alarm.init(hours: "12", minutes: "00", mode: "00")
+        currentAlarm = Alarm.init(hours: "12", minutes: "00", mode: "AM")
         timeDisplayHours.text = currentAlarm.getHours()
         timeDisplayMinutes.text = currentAlarm.getMinutes()
         timeDisplayMode.text = currentAlarm.getMode()
