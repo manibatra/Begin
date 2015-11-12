@@ -220,11 +220,11 @@ class ViewController: UIViewController  {
             hoursCounter2.invalidate()
             hoursCounter2 = nil
         }
-        
-        
-        self.ForceValue.text = "Return of the Jedi ?"
-        self.progress = 0.0
-        updateProgress(0)
+//
+//        
+//        self.ForceValue.text = "Return of the Jedi ?"
+//        self.progress = 0.0
+//        updateProgress(0)
         stopTouches = 0
         
     }
@@ -319,21 +319,21 @@ class ViewController: UIViewController  {
                 ForceValue.text = "\(touch.force)"
                 updateProgress(touch.force)
                 
-            } else if CGRectContainsPoint( CGRectMake(modeTouchBelow.frame.origin.x + touchBelowView.frame.origin.x, modeTouchBelow.frame.origin.y + touchBelowView.frame.origin.y, modeTouchBelow.frame.width, modeTouchBelow.frame.height), touchPoint) || CGRectContainsPoint( CGRectMake(modeTouchAbove.frame.origin.x + touchAboveView.frame.origin.x, modeTouchAbove.frame.origin.y + touchAboveView.frame.origin.y, modeTouchAbove.frame.width, modeTouchAbove.frame.height), touchPoint) {
+            } else if CGRectContainsPoint( CGRectMake(modeTouchBelow.frame.origin.x + touchBelowView.frame.origin.x, modeTouchBelow.frame.origin.y + touchBelowView.frame.origin.y, modeTouchBelow.frame.width, modeTouchBelow.frame.height), touchPoint) || CGRectContainsPoint( CGRectMake(modeTouchAbove.frame.origin.x + touchAboveView.frame.origin.x, modeTouchAbove.frame.origin.y + touchAboveView.frame.origin.y, modeTouchAbove.frame.width, modeTouchAbove.frame.height), touchPoint) && alarmOn == 0 {
                 
                 changeTime(touch.force, selector: "changeMode", touchedLabel: nil)
                 
                 
             }
                 
-            else if CGRectContainsPoint( CGRectMake(hoursTouchBelow.frame.origin.x + touchBelowView.frame.origin.x, hoursTouchBelow.frame.origin.y + touchBelowView.frame.origin.y, hoursTouchBelow.frame.width, hoursTouchBelow.frame.height), touchPoint) {
+            else if CGRectContainsPoint( CGRectMake(hoursTouchBelow.frame.origin.x + touchBelowView.frame.origin.x, hoursTouchBelow.frame.origin.y + touchBelowView.frame.origin.y, hoursTouchBelow.frame.width, hoursTouchBelow.frame.height), touchPoint) && alarmOn == 0 {
                 
                 touchedLabel = timeDisplayHours
                 touchDirection = 1
                 changeTime(touch.force, selector: "updateLabel", touchedLabel: touchedLabel)
                 
                 
-            } else if CGRectContainsPoint( CGRectMake(minutesTouchBelow.frame.origin.x + touchBelowView.frame.origin.x, minutesTouchBelow.frame.origin.y + touchBelowView.frame.origin.y, minutesTouchBelow.frame.width, minutesTouchBelow.frame.height), touchPoint) {
+            } else if CGRectContainsPoint( CGRectMake(minutesTouchBelow.frame.origin.x + touchBelowView.frame.origin.x, minutesTouchBelow.frame.origin.y + touchBelowView.frame.origin.y, minutesTouchBelow.frame.width, minutesTouchBelow.frame.height), touchPoint) && alarmOn == 0 {
                 
                 touchedLabel = timeDisplayMinutes
                 touchDirection = 1
@@ -341,7 +341,7 @@ class ViewController: UIViewController  {
                 
                 
                 
-            } else if CGRectContainsPoint( CGRectMake(hoursTouchAbove.frame.origin.x + touchAboveView.frame.origin.x, hoursTouchAbove.frame.origin.y + touchAboveView.frame.origin.y, hoursTouchAbove.frame.width, hoursTouchAbove.frame.height), touchPoint) {
+            } else if CGRectContainsPoint( CGRectMake(hoursTouchAbove.frame.origin.x + touchAboveView.frame.origin.x, hoursTouchAbove.frame.origin.y + touchAboveView.frame.origin.y, hoursTouchAbove.frame.width, hoursTouchAbove.frame.height), touchPoint) && alarmOn == 0 {
                 
                 touchedLabel = timeDisplayHours
                 touchDirection = -1
@@ -349,7 +349,7 @@ class ViewController: UIViewController  {
                 
                 
                 
-            } else if CGRectContainsPoint( CGRectMake(minutesTouchAbove.frame.origin.x + touchAboveView.frame.origin.x, minutesTouchAbove.frame.origin.y + touchAboveView.frame.origin.y, minutesTouchAbove.frame.width, minutesTouchAbove.frame.height), touchPoint) {
+            } else if CGRectContainsPoint( CGRectMake(minutesTouchAbove.frame.origin.x + touchAboveView.frame.origin.x, minutesTouchAbove.frame.origin.y + touchAboveView.frame.origin.y, minutesTouchAbove.frame.width, minutesTouchAbove.frame.height), touchPoint) && alarmOn == 0 {
                 
                 touchedLabel = timeDisplayMinutes
                 touchDirection = -1
@@ -357,7 +357,7 @@ class ViewController: UIViewController  {
                 
                 
                 
-            } else {
+            } else if !CGRectContainsPoint(CGRectMake(touchAboveView.frame.origin.x, touchAboveView.frame.origin.y, touchAboveView.frame.width, touchAboveView.frame.height + timeDisplayView.frame.height + touchBelowView.frame.height), touchPoint) || alarmOn == 1 {
                 
                 if touch.force > 6.666 && stopTouches == 0 {
                     
@@ -369,11 +369,26 @@ class ViewController: UIViewController  {
                         currentAlarm.setHours(timeDisplayHours.text!)
                         currentAlarm.setMinutes(timeDisplayMinutes.text!)
                         currentAlarm.setMode(timeDisplayMode.text!)
+                        self.touchAboveView.hidden = true
+                        self.touchBelowView.hidden = true
+                        UIView.animateWithDuration(2.0, delay: 0.1, options: [.CurveEaseInOut], animations: { () -> Void in
+                            
+                            self.timeDisplayView.frame.origin.y -= 300
+                        
+                            
+                            }, completion: nil)
                         break
                         
                     } else {
                         alarmOn = 0
                         self.view.backgroundColor = UIColor.init(red: 0.84, green:0.03, blue:0.03, alpha:1.0)
+                        UIView.animateWithDuration(2.0, delay: 0.1, options: [.CurveEaseInOut], animations: { () -> Void in
+                            
+                            self.timeDisplayView.frame.origin.y += 300
+                            
+                            }, completion: nil)
+                        self.touchAboveView.hidden = false
+                        self.touchBelowView.hidden = false
                         break
                         
                     }
@@ -385,6 +400,7 @@ class ViewController: UIViewController  {
         }
         
     }
+    
     
     func changeTime(force: CGFloat, selector: String, touchedLabel: UILabel!) {
         
