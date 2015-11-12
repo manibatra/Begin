@@ -16,6 +16,7 @@ class ViewController: UIViewController  {
     private var currentAlarm: Alarm!
     private var alarmOn = 0
     private var touchDirection = 1
+    private var stopTouches = 0
     private var hoursCounter0: NSTimer!
     private var hoursCounter1: NSTimer!
     private var hoursCounter2: NSTimer!
@@ -44,13 +45,15 @@ class ViewController: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.view.backgroundColor = UIColor.init(red: 0.84, green:0.03, blue:0.03, alpha:1.0)
+        
         if traitCollection.forceTouchCapability == UIForceTouchCapability.Available {
             
             ForceValue.text = "May the Force Be with YOu"
             
         }
         
-        currentAlarm = Alarm.init(hours: "5", minutes: "00", mode: "PM")
+        currentAlarm = Alarm.init(hours: "12", minutes: "00", mode: "00")
         timeDisplayHours.text = currentAlarm.getHours()
         timeDisplayMinutes.text = currentAlarm.getMinutes()
         timeDisplayMode.text = currentAlarm.getMode()
@@ -98,7 +101,7 @@ class ViewController: UIViewController  {
             textLabel.text = "\(Int(progress * 100.0))%"
         }
         
-        self.view.addSubview(halfCircularProgress)
+        //self.view.addSubview(halfCircularProgress)
         
     }
     
@@ -183,13 +186,13 @@ class ViewController: UIViewController  {
                 }))
                 
                 
-                //dispatch_async(dispatch_get_main_queue(), {
-                
-                
-                //self.presentViewController(alert, animated: true, completion: nil)
-                
-                
-                //})
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    
+                    self.presentViewController(alert, animated: true, completion: nil)
+                    
+                    
+                })
                 
             }
             
@@ -222,6 +225,7 @@ class ViewController: UIViewController  {
         self.ForceValue.text = "Return of the Jedi ?"
         self.progress = 0.0
         updateProgress(0)
+        stopTouches = 0
         
     }
     
@@ -355,9 +359,24 @@ class ViewController: UIViewController  {
                 
             } else {
                 
-                if touch.force > 6.666 {
+                if touch.force > 6.666 && stopTouches == 0 {
                     
-                    self.view.backgroundColor = UIColor.init(red: 0.0, green: 204, blue: 51, alpha: 1.0)
+                    stopTouches = 1
+                    
+                    if alarmOn == 0 {
+                        self.view.backgroundColor = UIColor.init(red: 0.05, green:0.68, blue:0.23, alpha:1.0)
+                        alarmOn = 1
+                        currentAlarm.setHours(timeDisplayHours.text!)
+                        currentAlarm.setMinutes(timeDisplayMinutes.text!)
+                        currentAlarm.setMode(timeDisplayMode.text!)
+                        break
+                        
+                    } else {
+                        alarmOn = 0
+                        self.view.backgroundColor = UIColor.init(red: 0.84, green:0.03, blue:0.03, alpha:1.0)
+                        break
+                        
+                    }
                 }
                 
             }

@@ -14,11 +14,29 @@ class Alarm {
     private var minutes: String
     private var mode: String
     
+    
+    
     init(hours: String, minutes: String, mode: String) {
         self.hours = hours
         self.minutes = minutes
         self.mode = mode
     }
+    
+    func setHours(hours: String) {
+        
+        self.hours = hours
+    }
+    
+    func setMinutes(minutes: String) {
+        
+        self.minutes = minutes
+    }
+    
+    func setMode(mode: String) {
+        
+        self.mode =  mode
+    }
+
     
     func getHours() -> String {
         
