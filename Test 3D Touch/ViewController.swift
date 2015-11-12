@@ -144,6 +144,7 @@ class ViewController: UIViewController  {
         if touchDirection == 1 {
             var current: Int = Int(touchedLabel.text!)!
             current = ((current % (12 * minuteFlag)) + 1)
+            current = current == 60 ? 0 : current
             touchedLabel.text = String(format: format, current)
         } else {
             var current: Int = Int(touchedLabel.text!)!
@@ -285,6 +286,7 @@ class ViewController: UIViewController  {
                 
                 var current: Int = Int(timeDisplayMinutes.text!)!
                 current = ((current % 60) + 1)
+                current = current == 60 ? 0 : current
                 timeDisplayMinutes.text = String(format:"%02d", current)
                 
                 
