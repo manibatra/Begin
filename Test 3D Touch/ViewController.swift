@@ -41,6 +41,8 @@ class ViewController: UIViewController  {
     @IBOutlet weak var minutesTouchBelow: UILabel!
     @IBOutlet weak var touchBelowView: UIStackView!
     
+
+    @IBOutlet weak var timeDisplayConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,21 +55,25 @@ class ViewController: UIViewController  {
             
         }
         
+        ForceTester.hidden = true
+        ForceValue.hidden = true
+        
         currentAlarm = Alarm.init(hours: "12", minutes: "00", mode: "AM")
         timeDisplayHours.text = currentAlarm.getHours()
         timeDisplayMinutes.text = currentAlarm.getMinutes()
         timeDisplayMode.text = currentAlarm.getMode()
-        
-        configureHalfCircularProgress()
-        updateProgress(0)
-        
-        
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0)) { // 1
             dispatch_async(dispatch_get_main_queue()) { // 2
                 let timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "checkAlarm", userInfo: nil, repeats: true)
                 timer.fire()
             }
         }
+
+        
+        configureHalfCircularProgress()
+        updateProgress(0)
+        
+        
         
         
     }
@@ -204,9 +210,7 @@ class ViewController: UIViewController  {
         
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        
-        print("the touch has ended")
+    func stopCounters() {
         
         if(hoursCounter0 != nil) {
             hoursCounter0.invalidate()
@@ -220,7 +224,14 @@ class ViewController: UIViewController  {
             hoursCounter2.invalidate()
             hoursCounter2 = nil
         }
-//
+
+    }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        print("the touch has ended")
+        stopCounters()
+        //
 //        
 //        self.ForceValue.text = "Return of the Jedi ?"
 //        self.progress = 0.0
@@ -359,14 +370,16 @@ class ViewController: UIViewController  {
                 
             } else if !CGRectContainsPoint(CGRectMake(touchAboveView.frame.origin.x, touchAboveView.frame.origin.y, touchAboveView.frame.width, touchAboveView.frame.height + timeDisplayView.frame.height + touchBelowView.frame.height), touchPoint) || alarmOn == 1 {
                 
-                print("alarm is : \(alarmOn)")
+                print("alarm is : \(stopTouches)")
                 if touch.force > 6.666 && stopTouches == 0 {
                     
                     stopTouches = 1
                     
                     if alarmOn == 0 {
+                        stopCounters()
                         self.touchAboveView.userInteractionEnabled = false
                         self.touchBelowView.userInteractionEnabled = false
+
                         self.view.userInteractionEnabled = false
                         self.view.backgroundColor = UIColor.init(red: 0.05, green:0.68, blue:0.23, alpha:1.0)
 
@@ -374,34 +387,36 @@ class ViewController: UIViewController  {
                         currentAlarm.setHours(timeDisplayHours.text!)
                         currentAlarm.setMinutes(timeDisplayMinutes.text!)
                         currentAlarm.setMode(timeDisplayMode.text!)
-                     
+                        self.timeDisplayConstraint.constant = self.timeDisplayConstraint.constant + 300
+
                         
                         UIView.animateWithDuration(1.0, delay: 0.0, options: [.CurveEaseInOut], animations: { () -> Void in
                             
-                            self.timeDisplayView.frame.origin.y -= 300
-                        
+                            self.view.layoutIfNeeded()
                             
                             }, completion: { (Bool) -> Void in
                                 
                                 self.alarmOn = 1
                                 self.view.userInteractionEnabled = true
+                              
                                 
                         })
                        break
                         
                     } else {
                         self.view.userInteractionEnabled = false
+                        self.timeDisplayConstraint.constant = self.timeDisplayConstraint.constant - 300
+
 
                         self.view.backgroundColor = UIColor.init(red: 0.84, green:0.03, blue:0.03, alpha:1.0)
                         UIView.animateWithDuration(2.0, delay: 0.1, options: [.CurveEaseInOut], animations: { () -> Void in
                             
-                            self.timeDisplayView.frame.origin.y += 300
+                            self.view.layoutIfNeeded()
                             
                             }, completion: { (Bool) -> Void in
                                 
                                 self.alarmOn = 0
                                 self.view.userInteractionEnabled = true
-
                                 self.touchAboveView.userInteractionEnabled = true
                                 self.touchBelowView.userInteractionEnabled = true
                         })
