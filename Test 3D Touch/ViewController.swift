@@ -80,7 +80,7 @@ class ViewController: UIViewController  {
     
     private func configureHalfCircularProgress() {
         
-        let progressFrame = CGRectMake(0, touchBelowView.frame.origin.y + touchBelowView.frame.height*2, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)/4)
+        let progressFrame = CGRectMake(0, timeDisplayView.frame.origin.y - 100, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)/4)
         halfCircularProgress = KYCircularProgress(frame: progressFrame, showProgressGuide: true)
         
         let center = CGPoint(x: view.frame.midX, y: 140.0)
@@ -107,7 +107,6 @@ class ViewController: UIViewController  {
             textLabel.text = "\(Int(progress * 100.0))%"
         }
         
-        //self.view.addSubview(halfCircularProgress)
         
     }
     
@@ -400,6 +399,9 @@ class ViewController: UIViewController  {
                                 
                                 self.alarmOn = 1
                                 self.view.userInteractionEnabled = true
+                                self.view.addSubview(self.halfCircularProgress)
+
+
                               
                                 
                         })
