@@ -8,6 +8,7 @@
 
 import UIKit
 import KYCircularProgress
+import AVFoundation
 
 
 
@@ -22,6 +23,9 @@ class ViewController: UIViewController  {
     private var hoursCounter0: NSTimer!
     private var hoursCounter1: NSTimer!
     private var hoursCounter2: NSTimer!
+    
+    private var alarmSound: NSURL!
+    private var audioPlayer: AVAudioPlayer!
     
     
     
@@ -73,6 +77,7 @@ class ViewController: UIViewController  {
         
         configureHalfCircularProgress()
         configureButton()
+        configureAudio()
         updateProgress(0)
         
         
@@ -80,6 +85,23 @@ class ViewController: UIViewController  {
         
     }
     
+    private func configureAudio() {
+        alarmSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("alarm", ofType: "wav")!)
+        audioPlayer = AVAudioPlayer()
+    }
+    
+    private func setUpPlayer() {
+        do {
+            self.audioPlayer = try AVAudioPlayer(contentsOfURL: self.alarmSound)
+        }
+        
+        catch {
+            
+            print("Error getting the audio file")
+            
+        }
+        audioPlayer.prepareToPlay()
+    }
     private func configureButton() {
         ForceTester = UIButton.init(frame: CGRectMake(self.halfCircularProgress.frame.origin.x + self.halfCircularProgress.frame.width/4, self.halfCircularProgress.frame.origin.y + self.halfCircularProgress.frame.height, self.halfCircularProgress.frame.width/2, self.halfCircularProgress.frame.height/2))
         
@@ -201,6 +223,8 @@ class ViewController: UIViewController  {
                 
                 alert.addAction(UIAlertAction(title: "Shut Up", style: UIAlertActionStyle.Cancel, handler: { (UIAlertAction) -> Void in
                     
+                    self.audioPlayer.stop()
+                    
                 }))
                 
                 
@@ -208,6 +232,7 @@ class ViewController: UIViewController  {
                     
                     
                     self.presentViewController(alert, animated: true, completion: nil)
+                    self.audioPlayer.play()
                     
                     
                 })
@@ -413,6 +438,7 @@ class ViewController: UIViewController  {
                                 self.view.userInteractionEnabled = true
                                 self.view.addSubview(self.halfCircularProgress)
                                 self.view.addSubview(self.ForceTester)
+                                self.setUpPlayer()
 
                               
                                 
