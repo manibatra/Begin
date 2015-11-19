@@ -9,6 +9,8 @@
 import UIKit
 import KYCircularProgress
 
+
+
 class ViewController: UIViewController  {
     
     private var halfCircularProgress: KYCircularProgress!
@@ -23,7 +25,7 @@ class ViewController: UIViewController  {
     
     
     
-    @IBOutlet weak var ForceTester: UILabel!
+    private var ForceTester: UIButton!
     @IBOutlet weak var ForceValue: UILabel!
     
     @IBOutlet weak var timeDisplayHours: UILabel!
@@ -55,7 +57,6 @@ class ViewController: UIViewController  {
             
         }
         
-        ForceTester.hidden = true
         ForceValue.hidden = true
         
         currentAlarm = Alarm.init(hours: "12", minutes: "00", mode: "AM")
@@ -71,11 +72,22 @@ class ViewController: UIViewController  {
 
         
         configureHalfCircularProgress()
+        configureButton()
         updateProgress(0)
         
         
         
         
+    }
+    
+    private func configureButton() {
+        ForceTester = UIButton.init(frame: CGRectMake(self.halfCircularProgress.frame.origin.x + self.halfCircularProgress.frame.width/4, self.halfCircularProgress.frame.origin.y + self.halfCircularProgress.frame.height, self.halfCircularProgress.frame.width/2, self.halfCircularProgress.frame.height/2))
+        
+        ForceTester.setTitle("Press Here", forState: UIControlState.Normal)
+        ForceTester.layer.cornerRadius = 20
+        ForceTester.titleLabel!.textAlignment = NSTextAlignment.Center
+        ForceTester.backgroundColor = UIColor.init(red: 0.84, green:0.03, blue:0.03, alpha:1.0)
+        ForceTester.userInteractionEnabled = false
     }
     
     private func configureHalfCircularProgress() {
@@ -234,8 +246,8 @@ class ViewController: UIViewController  {
         //
 //        
 //        self.ForceValue.text = "Return of the Jedi ?"
-//        self.progress = 0.0
-//        updateProgress(0)
+        self.progress = 0.0
+        updateProgress(0)
         stopTouches = 0
         
     }
@@ -400,7 +412,7 @@ class ViewController: UIViewController  {
                                 self.alarmOn = 1
                                 self.view.userInteractionEnabled = true
                                 self.view.addSubview(self.halfCircularProgress)
-
+                                self.view.addSubview(self.ForceTester)
 
                               
                                 
@@ -410,6 +422,9 @@ class ViewController: UIViewController  {
                     } else {
                         self.view.userInteractionEnabled = false
                         self.timeDisplayConstraint.constant = self.timeDisplayConstraint.constant - 300
+                        self.halfCircularProgress.removeFromSuperview()
+                        self.ForceTester.removeFromSuperview()
+
 
 
                         self.view.backgroundColor = UIColor.init(red: 0.84, green:0.03, blue:0.03, alpha:1.0)
@@ -423,7 +438,7 @@ class ViewController: UIViewController  {
                                 self.view.userInteractionEnabled = true
                                 self.touchAboveView.userInteractionEnabled = true
                                 self.touchBelowView.userInteractionEnabled = true
-                        })
+                                                        })
 
                         
                       

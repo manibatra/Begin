@@ -28,19 +28,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Press Here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2qv-5t-I5Y">
-                                <rect key="frame" x="226" y="71" width="172" height="99"/>
-                                <animations/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="172" id="N25-U5-ffq"/>
-                                    <constraint firstAttribute="height" constant="99" id="a87-p1-jkF"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="172" id="eMG-Xt-wLm"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="223" misplaced="YES" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Ny9-VC-OYj">
                                 <rect key="frame" x="184" y="429" width="257" height="48"/>
                                 <subviews>
@@ -234,14 +221,12 @@
                             <constraint firstAttribute="bottomMargin" secondItem="Ny9-VC-OYj" secondAttribute="bottom" constant="123" id="NFZ-FE-yNb"/>
                             <constraint firstItem="Ny9-VC-OYj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PvF-AH-5l3"/>
                             <constraint firstItem="Uea-Xp-csP" firstAttribute="top" secondItem="Ny9-VC-OYj" secondAttribute="bottom" id="eCA-wc-mDR"/>
-                            <constraint firstItem="2qv-5t-I5Y" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="12" id="s13-Ah-ZPJ"/>
                             <constraint firstItem="4pQ-va-cBu" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tX1-6T-Up5"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
                     <connections>
-                        <outlet property="ForceTester" destination="2qv-5t-I5Y" id="0eT-Ku-gkK"/>
                         <outlet property="ForceValue" destination="DSZ-zv-QMD" id="ACk-5s-rfE"/>
                         <outlet property="hoursTouchAbove" destination="oBz-41-yTU" id="fS2-TL-Xsm"/>
                         <outlet property="hoursTouchBelow" destination="ufd-Ze-bRx" id="5Rd-WF-kgf"/>
