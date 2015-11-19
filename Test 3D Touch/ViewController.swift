@@ -27,6 +27,10 @@ class ViewController: UIViewController  {
     private var alarmSound: NSURL!
     private var audioPlayer: AVAudioPlayer!
     
+    //the start and end angle of arc where the progress bar should be stopped
+    private var startAngle: Double = 0
+    private var endAngle: Double = 0
+    
     
     
     private var ForceTester: UIButton!
@@ -85,6 +89,34 @@ class ViewController: UIViewController  {
         
     }
     
+    private func configureStopZone() -> UIBezierPath {
+        
+        let outlineColor: UIColor = UIColor.whiteColor()
+        self.startAngle = 7 *  M_PI/4
+        self.endAngle = 1.78 * M_PI
+        
+        let center = CGPoint(x: view.frame.midX, y: 140.0)
+        
+        let outLinePath = UIBezierPath(arcCenter: center, radius: CGFloat(CGRectGetWidth(halfCircularProgress.frame)/3) + 15, startAngle: CGFloat(self.startAngle), endAngle: CGFloat(self.endAngle), clockwise: true)
+        
+        outLinePath.addArcWithCenter(center, radius: CGFloat(CGRectGetWidth(halfCircularProgress.frame)/3) + 10, startAngle: CGFloat(endAngle), endAngle: CGFloat(startAngle), clockwise: false)
+        
+        
+        outLinePath.closePath()
+        outlineColor.setStroke()
+        outLinePath.lineWidth = 4.0
+        
+        
+        outLinePath.stroke()
+        
+        return outLinePath
+        
+        
+    }
+    
+
+    
+    
     private func configureAudio() {
         alarmSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("alarm", ofType: "wav")!)
         audioPlayer = AVAudioPlayer()
@@ -134,6 +166,12 @@ class ViewController: UIViewController  {
         textLabel.textColor = UIColor.greenColor()
         textLabel.alpha = 0.3
         halfCircularProgress.addSubview(textLabel)
+        self.configureStopZone()
+        
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = self.configureStopZone().CGPath
+        self.halfCircularProgress.layer.addSublayer(shapeLayer)
+        
         
         halfCircularProgress.progressChangedClosure() {
             (progress: Double, circularView: KYCircularProgress) in
