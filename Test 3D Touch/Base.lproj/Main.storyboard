@@ -211,6 +211,14 @@
                                 </subviews>
                                 <animations/>
                             </stackView>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kzf-8p-eE5" customClass="ABSteppedProgressBar" customModule="ABSteppedProgressBar">
+                                <rect key="frame" x="174" y="507" width="279" height="50"/>
+                                <animations/>
+                                <color key="backgroundColor" red="1" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="279" id="HfD-vy-Fu8"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="1" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -218,9 +226,11 @@
                             <constraint firstItem="Ny9-VC-OYj" firstAttribute="top" secondItem="4pQ-va-cBu" secondAttribute="bottom" id="3VJ-RT-gl3"/>
                             <constraint firstItem="DSZ-zv-QMD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AxB-LA-WaI"/>
                             <constraint firstItem="Uea-Xp-csP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="E4x-Dd-2i9"/>
+                            <constraint firstItem="Kzf-8p-eE5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="EYX-NQ-W7a"/>
                             <constraint firstAttribute="bottomMargin" secondItem="Ny9-VC-OYj" secondAttribute="bottom" constant="123" id="NFZ-FE-yNb"/>
                             <constraint firstItem="Ny9-VC-OYj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PvF-AH-5l3"/>
                             <constraint firstItem="Uea-Xp-csP" firstAttribute="top" secondItem="Ny9-VC-OYj" secondAttribute="bottom" id="eCA-wc-mDR"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Kzf-8p-eE5" secondAttribute="bottom" constant="43" id="p7U-g4-Pqf"/>
                             <constraint firstItem="4pQ-va-cBu" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tX1-6T-Up5"/>
                         </constraints>
                     </view>

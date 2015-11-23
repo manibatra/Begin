@@ -9,6 +9,8 @@
 import UIKit
 import KYCircularProgress
 import AVFoundation
+import ABSteppedProgressBar
+
 
 
 
@@ -26,7 +28,7 @@ class ViewController: UIViewController  {
     
     private var alarmSound: NSURL!
     private var audioPlayer: AVAudioPlayer!
-    
+        
     //the start and end angle of arc where the progress bar should be stopped
     private var startAngle: Double = 0
     private var endAngle: Double = 0
@@ -80,7 +82,7 @@ class ViewController: UIViewController  {
         
         
         configureHalfCircularProgress()
-        configureButton()
+        //configureButton()
         configureAudio()
         updateProgress(0)
         
@@ -135,6 +137,8 @@ class ViewController: UIViewController  {
         audioPlayer.prepareToPlay()
     }
     private func configureButton() {
+        
+
         ForceTester = UIButton.init(frame: CGRectMake(self.halfCircularProgress.frame.origin.x + self.halfCircularProgress.frame.width/4, self.halfCircularProgress.frame.origin.y + self.halfCircularProgress.frame.height, self.halfCircularProgress.frame.width/2, self.halfCircularProgress.frame.height/2))
         
         ForceTester.setTitle("Press Here", forState: UIControlState.Normal)
@@ -401,12 +405,7 @@ class ViewController: UIViewController  {
             //print("the force in this one is : \(Double(touch.force))")
             
             
-            if CGRectContainsPoint(ForceTester.frame, touchPoint) && alarmOn == 1 {
-                
-                ForceValue.text = "\(touch.force)"
-                updateProgress(touch.force)
-                
-            } else if (CGRectContainsPoint( CGRectMake(modeTouchBelow.frame.origin.x + touchBelowView.frame.origin.x, modeTouchBelow.frame.origin.y + touchBelowView.frame.origin.y, modeTouchBelow.frame.width, modeTouchBelow.frame.height), touchPoint) || CGRectContainsPoint( CGRectMake(modeTouchAbove.frame.origin.x + touchAboveView.frame.origin.x, modeTouchAbove.frame.origin.y + touchAboveView.frame.origin.y, modeTouchAbove.frame.width, modeTouchAbove.frame.height), touchPoint)) && alarmOn == 0 && stopTouches == 0 {
+            if (CGRectContainsPoint( CGRectMake(modeTouchBelow.frame.origin.x + touchBelowView.frame.origin.x, modeTouchBelow.frame.origin.y + touchBelowView.frame.origin.y, modeTouchBelow.frame.width, modeTouchBelow.frame.height), touchPoint) || CGRectContainsPoint( CGRectMake(modeTouchAbove.frame.origin.x + touchAboveView.frame.origin.x, modeTouchAbove.frame.origin.y + touchAboveView.frame.origin.y, modeTouchAbove.frame.width, modeTouchAbove.frame.height), touchPoint)) && alarmOn == 0 && stopTouches == 0 {
                 
                 changeTime(touch.force, selector: "changeMode", touchedLabel: nil)
                 
@@ -476,7 +475,7 @@ class ViewController: UIViewController  {
                                 self.alarmOn = 1
                                 self.view.userInteractionEnabled = true
                                 self.view.addSubview(self.halfCircularProgress)
-                                self.view.addSubview(self.ForceTester)
+                                //self.view.addSubview(self.ForceTester)
                                 self.setUpPlayer()
                                 
                                 
