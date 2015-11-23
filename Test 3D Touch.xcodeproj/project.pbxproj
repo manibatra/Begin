@@ -14,7 +14,8 @@
 		60050E6F1BEB055400DAC93A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60050E6D1BEB055400DAC93A /* LaunchScreen.storyboard */; };
 		60050E7A1BEB055400DAC93A /* Test_3D_TouchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60050E791BEB055400DAC93A /* Test_3D_TouchTests.swift */; };
 		60050E851BEB055400DAC93A /* Test_3D_TouchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60050E841BEB055400DAC93A /* Test_3D_TouchUITests.swift */; };
-		60050E931BEB09D200DAC93A /* 3DTouchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60050E921BEB09D200DAC93A /* 3DTouchModel.swift */; };
+		602A18511BFD952A008F2B51 /* alarm.wav in Resources */ = {isa = PBXBuildFile; fileRef = 602A18501BFD952A008F2B51 /* alarm.wav */; };
+		606A7B1A1BF06DCC00ED4E5A /* AlarmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606A7B191BF06DCC00ED4E5A /* AlarmObject.swift */; };
 		F15E8494EF9505E05C08C7C5 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF07842EB1F68BA72CC061F /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,7 +51,8 @@
 		60050E801BEB055400DAC93A /* Test 3D TouchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Test 3D TouchUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60050E841BEB055400DAC93A /* Test_3D_TouchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_3D_TouchUITests.swift; sourceTree = "<group>"; };
 		60050E861BEB055400DAC93A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		60050E921BEB09D200DAC93A /* 3DTouchModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = 3DTouchModel.swift; sourceTree = "<group>"; };
+		602A18501BFD952A008F2B51 /* alarm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = alarm.wav; sourceTree = "<group>"; };
+		606A7B191BF06DCC00ED4E5A /* AlarmObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmObject.swift; sourceTree = "<group>"; };
 		7CF07842EB1F68BA72CC061F /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFCBD7B6C74D3D70A45C1D39 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,13 +108,14 @@
 		60050E631BEB055400DAC93A /* Test 3D Touch */ = {
 			isa = PBXGroup;
 			children = (
+				602A18501BFD952A008F2B51 /* alarm.wav */,
 				60050E641BEB055400DAC93A /* AppDelegate.swift */,
-				60050E921BEB09D200DAC93A /* 3DTouchModel.swift */,
 				60050E661BEB055400DAC93A /* ViewController.swift */,
 				60050E681BEB055400DAC93A /* Main.storyboard */,
 				60050E6B1BEB055400DAC93A /* Assets.xcassets */,
 				60050E6D1BEB055400DAC93A /* LaunchScreen.storyboard */,
 				60050E701BEB055400DAC93A /* Info.plist */,
+				606A7B191BF06DCC00ED4E5A /* AlarmObject.swift */,
 			);
 			path = "Test 3D Touch";
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				60050E6F1BEB055400DAC93A /* LaunchScreen.storyboard in Resources */,
+				602A18511BFD952A008F2B51 /* alarm.wav in Resources */,
 				60050E6C1BEB055400DAC93A /* Assets.xcassets in Resources */,
 				60050E6A1BEB055400DAC93A /* Main.storyboard in Resources */,
 			);
@@ -335,7 +339,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60050E931BEB09D200DAC93A /* 3DTouchModel.swift in Sources */,
+				606A7B1A1BF06DCC00ED4E5A /* AlarmObject.swift in Sources */,
 				60050E671BEB055400DAC93A /* ViewController.swift in Sources */,
 				60050E651BEB055400DAC93A /* AppDelegate.swift in Sources */,
 			);
