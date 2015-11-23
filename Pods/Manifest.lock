@@ -1,10 +1,13 @@
 PODS:
+  - ABSteppedProgressBar (0.0.3)
   - KYCircularProgress (0.5.1)
 
 DEPENDENCIES:
+  - ABSteppedProgressBar
   - KYCircularProgress
 
 SPEC CHECKSUMS:
+  ABSteppedProgressBar: 2f4f51ad45a9610f15fb696e2447482e690210c5
   KYCircularProgress: 69a6d6852d96ca2be2830cc659b85aab3bb1cee6
 
 COCOAPODS: 0.39.0

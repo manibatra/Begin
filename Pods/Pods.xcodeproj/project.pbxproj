@@ -7,17 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2577FDB1646F7F6722BA3420CD3787CA /* KYCircularProgress-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6669D9F6A0728358281D984FFF884B5F /* KYCircularProgress-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		283B431A96A87991332875E040A86751 /* Pods-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2BCC458FDD5F692BBB2BFC64BB5701FC /* Pods-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		54A6997D21854906C6CCB2EAED5B4A2D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
-		5FB93390A0B1615106B3EE87F90330B5 /* KYCircularProgress-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 415234F1DD3779D2287184AD8A7F8C83 /* KYCircularProgress-dummy.m */; };
-		76ED087FB9A24515035CA1B244C83B3A /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 894E5DA93A9F359521A89826BE6DA777 /* Pods-dummy.m */; };
-		7B37C256A0564AB8EF318B2DBC9C762C /* KYCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392253AEA0E4F48ABE03E27190CA091E /* KYCircularProgress.swift */; };
+		2577FDB1646F7F6722BA3420CD3787CA /* KYCircularProgress-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FF52F041E722BED4B4B56D716EBC77A6 /* KYCircularProgress-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3FD22059D1ECC76179E329EE5152241B /* ABSteppedProgessBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D38DD042CDBEE6534F0473ED055D807 /* ABSteppedProgessBar.swift */; };
+		49EA1E45E0B6B07283833BF7F609A255 /* ABSteppedProgressBar-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EE4AEB5322264DB1969D6C8C78CF1A5 /* ABSteppedProgressBar-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4D2345A1A5727793ED86841E18880453 /* ABPointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E78BAC4D35C0AF440E1A6193DEEDDEB /* ABPointExtension.swift */; };
+		5FB93390A0B1615106B3EE87F90330B5 /* KYCircularProgress-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D958224506E2ABEB05E43014CE18E096 /* KYCircularProgress-dummy.m */; };
+		63AB24FF11F288AE7A4A9D6621121450 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		6C0E6F8380D32927CB6C770E3426C7DA /* Pods-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2BCC458FDD5F692BBB2BFC64BB5701FC /* Pods-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B37C256A0564AB8EF318B2DBC9C762C /* KYCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2CDB95D5D42BF5701E2F8F2CDAE8A4 /* KYCircularProgress.swift */; };
+		80ED0374B75F87B6B39D6DEE32265C8A /* ABTextLayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B47D4F1A887EE74A12CEFDC6CCE1F34 /* ABTextLayerExtension.swift */; };
+		8EB8D342390AA30317E5EAF83AC28184 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
 		BB08092BD20D7EE1D424FB5454CC943F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		DE1982561BAB92A515B6B3F8B135BF42 /* ABSteppedProgressBar-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DBE4FA5CFCB7DB7BD4EEF13E9552B054 /* ABSteppedProgressBar-dummy.m */; };
+		E7A64382D2A651800D28BB9B7D51AC3A /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 894E5DA93A9F359521A89826BE6DA777 /* Pods-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D87779318AC52B14766E47B578167448 /* PBXContainerItemProxy */ = {
+		28BBCDC71B2DC28091195F141CAEED75 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2E180613C6E640BD4792AC9ED5A3E15;
+			remoteInfo = ABSteppedProgressBar;
+		};
+		64B7EBB1907C669CCEAFFB8AC839C28B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
@@ -27,35 +40,45 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		24F503DAF9E5117A50CBA34349E3A69C /* KYCircularProgress-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KYCircularProgress-prefix.pch"; sourceTree = "<group>"; };
-		296D7C810DC32EBAF5E349AFB8720111 /* KYCircularProgress.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = KYCircularProgress.xcconfig; sourceTree = "<group>"; };
+		0A09930FBC23017588FC19CB7341B6BD /* KYCircularProgress.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = KYCircularProgress.modulemap; sourceTree = "<group>"; };
+		0D2CDB95D5D42BF5701E2F8F2CDAE8A4 /* KYCircularProgress.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KYCircularProgress.swift; path = Source/KYCircularProgress.swift; sourceTree = "<group>"; };
+		1EE4AEB5322264DB1969D6C8C78CF1A5 /* ABSteppedProgressBar-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ABSteppedProgressBar-umbrella.h"; sourceTree = "<group>"; };
 		2BCC458FDD5F692BBB2BFC64BB5701FC /* Pods-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-umbrella.h"; sourceTree = "<group>"; };
-		392253AEA0E4F48ABE03E27190CA091E /* KYCircularProgress.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KYCircularProgress.swift; path = Source/KYCircularProgress.swift; sourceTree = "<group>"; };
+		2E78BAC4D35C0AF440E1A6193DEEDDEB /* ABPointExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ABPointExtension.swift; path = Sources/ABPointExtension.swift; sourceTree = "<group>"; };
+		2EB574F650262763D0CCAD0DCAFBE3CE /* KYCircularProgress-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KYCircularProgress-prefix.pch"; sourceTree = "<group>"; };
 		3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		415234F1DD3779D2287184AD8A7F8C83 /* KYCircularProgress-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "KYCircularProgress-dummy.m"; sourceTree = "<group>"; };
-		490047BD39C85DA3CCEE67CB023AF44F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5ACFEA571EE335FD2DD5C3916587C970 /* KYCircularProgress.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = KYCircularProgress.modulemap; sourceTree = "<group>"; };
-		6669D9F6A0728358281D984FFF884B5F /* KYCircularProgress-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KYCircularProgress-umbrella.h"; sourceTree = "<group>"; };
+		4C3D7F61CA86BBB9EBB22C9B4ADCD69C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		54A7EFBD93529B1806A415C34D46C92B /* ABSteppedProgressBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ABSteppedProgressBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B47D4F1A887EE74A12CEFDC6CCE1F34 /* ABTextLayerExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ABTextLayerExtension.swift; path = Sources/ABTextLayerExtension.swift; sourceTree = "<group>"; };
+		5D38DD042CDBEE6534F0473ED055D807 /* ABSteppedProgessBar.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ABSteppedProgessBar.swift; path = Sources/ABSteppedProgessBar.swift; sourceTree = "<group>"; };
+		6232112A7F086308B99B8E8B560480C6 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79A9DEDC89FE8336BF5FEDAAF75BF7FC /* Pods.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Pods.modulemap; sourceTree = "<group>"; };
 		87B213035BAC5F75386F62D3C75D2342 /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
 		894E5DA93A9F359521A89826BE6DA777 /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
-		92336291C16C7BC54220858E8CFC0548 /* KYCircularProgress.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KYCircularProgress.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		93237E67FC96F2C72FBC4E66B008F5A6 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		977577C045EDA9D9D1F46E2598D19FC7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		C05A1650AC56E4CB52D5AA08C2528030 /* ABSteppedProgressBar.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = ABSteppedProgressBar.modulemap; sourceTree = "<group>"; };
 		CBC0F7C552B739C909B650A0F42F7F38 /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
 		D0405803033A2A777B8E4DFA0C1800ED /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
+		D958224506E2ABEB05E43014CE18E096 /* KYCircularProgress-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "KYCircularProgress-dummy.m"; sourceTree = "<group>"; };
 		DA312349A49333542E6F4B36B329960E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
+		DBE4FA5CFCB7DB7BD4EEF13E9552B054 /* ABSteppedProgressBar-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ABSteppedProgressBar-dummy.m"; sourceTree = "<group>"; };
+		E1E27529C6DCC7EB69BFE1769B245A52 /* KYCircularProgress.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KYCircularProgress.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3CD31DEE6BA713ACAD53DD61A33D7F2 /* ABSteppedProgressBar.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ABSteppedProgressBar.xcconfig; sourceTree = "<group>"; };
 		E7F21354943D9F42A70697D5A5EF72E9 /* Pods-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-frameworks.sh"; sourceTree = "<group>"; };
 		E8446514FBAD26C0E18F24A5715AEF67 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF8072EE597A04070CFFA650A15E1D43 /* KYCircularProgress.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = KYCircularProgress.xcconfig; sourceTree = "<group>"; };
+		F17652F95F29C0D463966969F89DBAE8 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F953246980114A1032B36D0D9C791974 /* ABSteppedProgressBar-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ABSteppedProgressBar-prefix.pch"; sourceTree = "<group>"; };
+		FF52F041E722BED4B4B56D716EBC77A6 /* KYCircularProgress-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KYCircularProgress-umbrella.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		2FAEF67507E178C4959AAC47BC1BB935 /* Frameworks */ = {
+		21E66526D530DAAA9F95AE340F0BDA48 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54A6997D21854906C6CCB2EAED5B4A2D /* Foundation.framework in Frameworks */,
+				8EB8D342390AA30317E5EAF83AC28184 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,30 +90,35 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D2A883D43B77A126040FBDDA968B4449 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63AB24FF11F288AE7A4A9D6621121450 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0E47C73BA0202291E54AF03AD0EC2599 /* Products */ = {
+		3A153AB2605E6F3C08F16812B2424F40 /* KYCircularProgress */ = {
 			isa = PBXGroup;
 			children = (
-				92336291C16C7BC54220858E8CFC0548 /* KYCircularProgress.framework */,
-				93237E67FC96F2C72FBC4E66B008F5A6 /* Pods.framework */,
+				0D2CDB95D5D42BF5701E2F8F2CDAE8A4 /* KYCircularProgress.swift */,
+				87EEE72C4D1762D0A648D827EA3FF509 /* Support Files */,
 			);
-			name = Products;
+			path = KYCircularProgress;
 			sourceTree = "<group>";
 		};
-		264F12887407935541B4E40A9EB2DDE0 /* Support Files */ = {
+		58F3F01EF10D6D980AF7126192ECCFA1 /* ABSteppedProgressBar */ = {
 			isa = PBXGroup;
 			children = (
-				490047BD39C85DA3CCEE67CB023AF44F /* Info.plist */,
-				5ACFEA571EE335FD2DD5C3916587C970 /* KYCircularProgress.modulemap */,
-				296D7C810DC32EBAF5E349AFB8720111 /* KYCircularProgress.xcconfig */,
-				415234F1DD3779D2287184AD8A7F8C83 /* KYCircularProgress-dummy.m */,
-				24F503DAF9E5117A50CBA34349E3A69C /* KYCircularProgress-prefix.pch */,
-				6669D9F6A0728358281D984FFF884B5F /* KYCircularProgress-umbrella.h */,
+				2E78BAC4D35C0AF440E1A6193DEEDDEB /* ABPointExtension.swift */,
+				5D38DD042CDBEE6534F0473ED055D807 /* ABSteppedProgessBar.swift */,
+				5B47D4F1A887EE74A12CEFDC6CCE1F34 /* ABTextLayerExtension.swift */,
+				B6EA8414F6B01124A828909A2CA5C8FE /* Support Files */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/KYCircularProgress";
+			path = ABSteppedProgressBar;
 			sourceTree = "<group>";
 		};
 		75D98FF52E597A11900E131B6C4E1ADA /* Pods */ = {
@@ -111,15 +139,62 @@
 			path = "Target Support Files/Pods";
 			sourceTree = "<group>";
 		};
+		76B652D0E8FE6B451BA689ADD513427E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				58F3F01EF10D6D980AF7126192ECCFA1 /* ABSteppedProgressBar */,
+				3A153AB2605E6F3C08F16812B2424F40 /* KYCircularProgress */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				FC13F129C9D8D50F9EC63BBF447E0339 /* Pods */,
-				0E47C73BA0202291E54AF03AD0EC2599 /* Products */,
+				76B652D0E8FE6B451BA689ADD513427E /* Pods */,
+				A2393382BE2628278F94B3731A7BE91D /* Products */,
 				B7B80995527643776607AFFA75B91E24 /* Targets Support Files */,
 			);
+			sourceTree = "<group>";
+		};
+		87EEE72C4D1762D0A648D827EA3FF509 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				4C3D7F61CA86BBB9EBB22C9B4ADCD69C /* Info.plist */,
+				0A09930FBC23017588FC19CB7341B6BD /* KYCircularProgress.modulemap */,
+				EF8072EE597A04070CFFA650A15E1D43 /* KYCircularProgress.xcconfig */,
+				D958224506E2ABEB05E43014CE18E096 /* KYCircularProgress-dummy.m */,
+				2EB574F650262763D0CCAD0DCAFBE3CE /* KYCircularProgress-prefix.pch */,
+				FF52F041E722BED4B4B56D716EBC77A6 /* KYCircularProgress-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/KYCircularProgress";
+			sourceTree = "<group>";
+		};
+		A2393382BE2628278F94B3731A7BE91D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				54A7EFBD93529B1806A415C34D46C92B /* ABSteppedProgressBar.framework */,
+				E1E27529C6DCC7EB69BFE1769B245A52 /* KYCircularProgress.framework */,
+				6232112A7F086308B99B8E8B560480C6 /* Pods.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B6EA8414F6B01124A828909A2CA5C8FE /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				C05A1650AC56E4CB52D5AA08C2528030 /* ABSteppedProgressBar.modulemap */,
+				E3CD31DEE6BA713ACAD53DD61A33D7F2 /* ABSteppedProgressBar.xcconfig */,
+				DBE4FA5CFCB7DB7BD4EEF13E9552B054 /* ABSteppedProgressBar-dummy.m */,
+				F953246980114A1032B36D0D9C791974 /* ABSteppedProgressBar-prefix.pch */,
+				1EE4AEB5322264DB1969D6C8C78CF1A5 /* ABSteppedProgressBar-umbrella.h */,
+				F17652F95F29C0D463966969F89DBAE8 /* Info.plist */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/ABSteppedProgressBar";
 			sourceTree = "<group>";
 		};
 		B7B80995527643776607AFFA75B91E24 /* Targets Support Files */ = {
@@ -146,31 +221,22 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		DD1F9E99821575074AE063EFAE03B326 /* KYCircularProgress */ = {
-			isa = PBXGroup;
-			children = (
-				392253AEA0E4F48ABE03E27190CA091E /* KYCircularProgress.swift */,
-				264F12887407935541B4E40A9EB2DDE0 /* Support Files */,
-			);
-			path = KYCircularProgress;
-			sourceTree = "<group>";
-		};
-		FC13F129C9D8D50F9EC63BBF447E0339 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				DD1F9E99821575074AE063EFAE03B326 /* KYCircularProgress */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		E2910A74088DD27F55625F88862AB54C /* Headers */ = {
+		7DA33FE5EAEE2FD7136C7E2D52FB0C06 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				283B431A96A87991332875E040A86751 /* Pods-umbrella.h in Headers */,
+				49EA1E45E0B6B07283833BF7F609A255 /* ABSteppedProgressBar-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9574E1DC313C13F6411555635DBE4F59 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C0E6F8380D32927CB6C770E3426C7DA /* Pods-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,25 +265,43 @@
 			);
 			name = KYCircularProgress;
 			productName = KYCircularProgress;
-			productReference = 92336291C16C7BC54220858E8CFC0548 /* KYCircularProgress.framework */;
+			productReference = E1E27529C6DCC7EB69BFE1769B245A52 /* KYCircularProgress.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		EDBEBDC17334CFD149E41E55CF131275 /* Pods */ = {
+		6C04DEBACDB397FE2DC4392424B00373 /* Pods */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8C6B10C7DC300A335F8A6222BC003260 /* Build configuration list for PBXNativeTarget "Pods" */;
+			buildConfigurationList = 1E537807220888EF0B4D68209CF2966E /* Build configuration list for PBXNativeTarget "Pods" */;
 			buildPhases = (
-				2F40EA1984534F38B8413AF6EAFA1F85 /* Sources */,
-				2FAEF67507E178C4959AAC47BC1BB935 /* Frameworks */,
-				E2910A74088DD27F55625F88862AB54C /* Headers */,
+				D32D975EF5153614BE06DF2CABA82B33 /* Sources */,
+				D2A883D43B77A126040FBDDA968B4449 /* Frameworks */,
+				9574E1DC313C13F6411555635DBE4F59 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				262B36DEE4022E07082B351A6D408798 /* PBXTargetDependency */,
+				432B29B85B65A14DF108F6D154C92203 /* PBXTargetDependency */,
+				76F4F5C7B217541BC7615F2DF535F824 /* PBXTargetDependency */,
 			);
 			name = Pods;
 			productName = Pods;
-			productReference = 93237E67FC96F2C72FBC4E66B008F5A6 /* Pods.framework */;
+			productReference = 6232112A7F086308B99B8E8B560480C6 /* Pods.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D2E180613C6E640BD4792AC9ED5A3E15 /* ABSteppedProgressBar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F8920BD8EB54BDEAB5BB995EC3274BF0 /* Build configuration list for PBXNativeTarget "ABSteppedProgressBar" */;
+			buildPhases = (
+				54650BCDDC42231DF611A7F17D9B3C4C /* Sources */,
+				21E66526D530DAAA9F95AE340F0BDA48 /* Frameworks */,
+				7DA33FE5EAEE2FD7136C7E2D52FB0C06 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ABSteppedProgressBar;
+			productName = ABSteppedProgressBar;
+			productReference = 54A7EFBD93529B1806A415C34D46C92B /* ABSteppedProgressBar.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -237,12 +321,13 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 0E47C73BA0202291E54AF03AD0EC2599 /* Products */;
+			productRefGroup = A2393382BE2628278F94B3731A7BE91D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				D2E180613C6E640BD4792AC9ED5A3E15 /* ABSteppedProgressBar */,
 				0A58A06E901FEDDCAA6B5AFD26C8C0B1 /* KYCircularProgress */,
-				EDBEBDC17334CFD149E41E55CF131275 /* Pods */,
+				6C04DEBACDB397FE2DC4392424B00373 /* Pods */,
 			);
 		};
 /* End PBXProject section */
@@ -257,54 +342,44 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2F40EA1984534F38B8413AF6EAFA1F85 /* Sources */ = {
+		54650BCDDC42231DF611A7F17D9B3C4C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76ED087FB9A24515035CA1B244C83B3A /* Pods-dummy.m in Sources */,
+				4D2345A1A5727793ED86841E18880453 /* ABPointExtension.swift in Sources */,
+				3FD22059D1ECC76179E329EE5152241B /* ABSteppedProgessBar.swift in Sources */,
+				DE1982561BAB92A515B6B3F8B135BF42 /* ABSteppedProgressBar-dummy.m in Sources */,
+				80ED0374B75F87B6B39D6DEE32265C8A /* ABTextLayerExtension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D32D975EF5153614BE06DF2CABA82B33 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7A64382D2A651800D28BB9B7D51AC3A /* Pods-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		262B36DEE4022E07082B351A6D408798 /* PBXTargetDependency */ = {
+		432B29B85B65A14DF108F6D154C92203 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ABSteppedProgressBar;
+			target = D2E180613C6E640BD4792AC9ED5A3E15 /* ABSteppedProgressBar */;
+			targetProxy = 28BBCDC71B2DC28091195F141CAEED75 /* PBXContainerItemProxy */;
+		};
+		76F4F5C7B217541BC7615F2DF535F824 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = KYCircularProgress;
 			target = 0A58A06E901FEDDCAA6B5AFD26C8C0B1 /* KYCircularProgress */;
-			targetProxy = D87779318AC52B14766E47B578167448 /* PBXContainerItemProxy */;
+			targetProxy = 64B7EBB1907C669CCEAFFB8AC839C28B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		40A7DA952EB39B405572F157F22DAF25 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 296D7C810DC32EBAF5E349AFB8720111 /* KYCircularProgress.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/KYCircularProgress/KYCircularProgress-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/KYCircularProgress/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/KYCircularProgress/KYCircularProgress.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = KYCircularProgress;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		436A156D65BA81C5AFEF82BA479ECCC1 /* Debug */ = {
+		322E3DA6DC9C9509A7515A48FE0F290A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 977577C045EDA9D9D1F46E2598D19FC7 /* Pods.debug.xcconfig */;
 			buildSettings = {
@@ -335,9 +410,9 @@
 			};
 			name = Debug;
 		};
-		9C92C74BF191FE5FCAF551925C12A060 /* Release */ = {
+		40A7DA952EB39B405572F157F22DAF25 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DA312349A49333542E6F4B36B329960E /* Pods.release.xcconfig */;
+			baseConfigurationReference = EF8072EE597A04070CFFA650A15E1D43 /* KYCircularProgress.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -346,17 +421,14 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/KYCircularProgress/KYCircularProgress-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/KYCircularProgress/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods/Pods.modulemap";
+				MODULEMAP_FILE = "Target Support Files/KYCircularProgress/KYCircularProgress.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = Pods;
+				PRODUCT_NAME = KYCircularProgress;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -404,9 +476,37 @@
 			};
 			name = Debug;
 		};
+		B75D9E00053B330FA2E512482DAC2C71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E3CD31DEE6BA713ACAD53DD61A33D7F2 /* ABSteppedProgressBar.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/ABSteppedProgressBar/ABSteppedProgressBar-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ABSteppedProgressBar/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ABSteppedProgressBar/ABSteppedProgressBar.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = ABSteppedProgressBar;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		BF6B4ADE422A110EDBDDD77E3F425AD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 296D7C810DC32EBAF5E349AFB8720111 /* KYCircularProgress.xcconfig */;
+			baseConfigurationReference = EF8072EE597A04070CFFA650A15E1D43 /* KYCircularProgress.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -431,6 +531,63 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
+		};
+		D10CEC00B22252A9E407CD9EB2D00E10 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA312349A49333542E6F4B36B329960E /* Pods.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods/Pods.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		EF024008017358E1EAA7036A57A89A4A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E3CD31DEE6BA713ACAD53DD61A33D7F2 /* ABSteppedProgressBar.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/ABSteppedProgressBar/ABSteppedProgressBar-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ABSteppedProgressBar/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ABSteppedProgressBar/ABSteppedProgressBar.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = ABSteppedProgressBar;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		FB45FFD90572718D82AB9092B750F0CA /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -469,6 +626,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1E537807220888EF0B4D68209CF2966E /* Build configuration list for PBXNativeTarget "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				322E3DA6DC9C9509A7515A48FE0F290A /* Debug */,
+				D10CEC00B22252A9E407CD9EB2D00E10 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -487,11 +653,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8C6B10C7DC300A335F8A6222BC003260 /* Build configuration list for PBXNativeTarget "Pods" */ = {
+		F8920BD8EB54BDEAB5BB995EC3274BF0 /* Build configuration list for PBXNativeTarget "ABSteppedProgressBar" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				436A156D65BA81C5AFEF82BA479ECCC1 /* Debug */,
-				9C92C74BF191FE5FCAF551925C12A060 /* Release */,
+				B75D9E00053B330FA2E512482DAC2C71 /* Debug */,
+				EF024008017358E1EAA7036A57A89A4A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -84,8 +84,10 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods/ABSteppedProgressBar.framework"
   install_framework "Pods/KYCircularProgress.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods/ABSteppedProgressBar.framework"
   install_framework "Pods/KYCircularProgress.framework"
 fi
