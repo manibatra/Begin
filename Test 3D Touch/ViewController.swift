@@ -337,12 +337,18 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
         //
         //        self.ForceValue.text = "Return of the Jedi ?"
         self.progress = 0.0
-        updateProgress(0)
+        if forceTouch {
+            updateProgress(0)
+        }
         stopTouches = 0
         
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        if !forceTouch {
+            updateProgress(0)
+        }
         
         
         for touch in touches {
