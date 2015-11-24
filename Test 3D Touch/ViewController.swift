@@ -34,6 +34,7 @@ class ViewController: UIViewController  {
     private var endAngle: Double = 0
     
     
+    @IBOutlet weak var stepProgress: ABSteppedProgressBar!
     
     private var ForceTester: UIButton!
     @IBOutlet weak var ForceValue: UILabel!
@@ -68,6 +69,8 @@ class ViewController: UIViewController  {
         }
         
         ForceValue.hidden = true
+        
+        stepProgress.hidden = true
         
         currentAlarm = Alarm.init(hours: "12", minutes: "00", mode: "AM")
         timeDisplayHours.text = currentAlarm.getHours()
@@ -194,6 +197,7 @@ class ViewController: UIViewController  {
         
         
         
+        
     }
     
     func updateLabel() {
@@ -256,25 +260,43 @@ class ViewController: UIViewController  {
             let mode = timeString.componentsSeparatedByString(":")[1].componentsSeparatedByString(" ")[1]
             if hours == self.currentAlarm.getHours() && minutes == self.currentAlarm.getMinutes() && mode == self.currentAlarm.getMode() && self.alarmOn == 1 {
                 
-                self.alarmOn = 0
+//                self.alarmOn = 0
+//                
+//                let alert = UIAlertController (title: "Alarm Time", message: "Wakey Wakey!!", preferredStyle: UIAlertControllerStyle.Alert)
+//                
+//                
+//                
+//                
+//                alert.addAction(UIAlertAction(title: "Shut Up", style: UIAlertActionStyle.Cancel, handler: { (UIAlertAction) -> Void in
+//                    
+//                    self.audioPlayer.stop()
+//                    
+//                }))
                 
-                let alert = UIAlertController (title: "Alarm Time", message: "Wakey Wakey!!", preferredStyle: UIAlertControllerStyle.Alert)
-                
-                
-                
-                
-                alert.addAction(UIAlertAction(title: "Shut Up", style: UIAlertActionStyle.Cancel, handler: { (UIAlertAction) -> Void in
-                    
-                    self.audioPlayer.stop()
-                    
-                }))
-                
-                
+                if !self.audioPlayer.playing {
+                    self.audioPlayer.play()
+                }
                 dispatch_async(dispatch_get_main_queue(), {
                     
                     
-                    self.presentViewController(alert, animated: true, completion: nil)
-                    self.audioPlayer.play()
+//                    self.presentViewController(alert, animated: true, completion: nil)
+//                    self.audioPlayer.play()
+                    
+                    
+                    
+                    if self.progress >= 0.74 && self.progress <= 0.78 && self.stepProgress.currentIndex < 3 {
+                        self.stepProgress.userInteractionEnabled = true
+                        self.stepProgress.currentIndex = self.stepProgress.currentIndex + 1
+                    } else if self.stepProgress.currentIndex >= 3  {
+                        
+                      //  self.alarmOn = 0
+                        self.switchOffAlarm()
+
+                        
+                    }
+
+                    
+                    
                     
                     
                 })
@@ -477,6 +499,9 @@ class ViewController: UIViewController  {
                                 self.view.addSubview(self.halfCircularProgress)
                                 //self.view.addSubview(self.ForceTester)
                                 self.setUpPlayer()
+                                self.stepProgress.hidden = false
+                                self.stepProgress.userInteractionEnabled = false
+
                                 
                                 
                                 
@@ -505,9 +530,11 @@ class ViewController: UIViewController  {
     
     func switchOffAlarm() {
         self.view.userInteractionEnabled = false
-        self.timeDisplayConstraint.constant = self.timeDisplayConstraint.constant - 300
+        self.timeDisplayConstraint.constant = 123
         self.halfCircularProgress.removeFromSuperview()
-        self.ForceTester.removeFromSuperview()
+       // self.ForceTester.removeFromSuperview()
+        self.stepProgress.hidden = true
+
         
         
         
@@ -522,6 +549,7 @@ class ViewController: UIViewController  {
                 self.view.userInteractionEnabled = true
                 self.touchAboveView.userInteractionEnabled = true
                 self.touchBelowView.userInteractionEnabled = true
+                self.audioPlayer.stop()
         })
         
     }

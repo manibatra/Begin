@@ -218,6 +218,12 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="279" id="HfD-vy-Fu8"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="displayNumbers" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="numberOfPoints">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <animations/>
@@ -244,6 +250,7 @@
                         <outlet property="minutesTouchBelow" destination="F6O-ea-3wF" id="VCA-4p-mvY"/>
                         <outlet property="modeTouchAbove" destination="IRN-61-Fsn" id="tKE-60-dSr"/>
                         <outlet property="modeTouchBelow" destination="HZb-yB-dsL" id="3ES-Uy-AJX"/>
+                        <outlet property="stepProgress" destination="Kzf-8p-eE5" id="BMa-Sb-nsD"/>
                         <outlet property="timeDisplayConstraint" destination="NFZ-FE-yNb" id="fUu-sm-nqi"/>
                         <outlet property="timeDisplayHours" destination="buF-6u-zNH" id="C9q-8o-B28"/>
                         <outlet property="timeDisplayMinutes" destination="FVD-zG-Wia" id="k0d-jU-WXQ"/>
