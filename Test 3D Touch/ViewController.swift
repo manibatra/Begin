@@ -14,7 +14,7 @@ import ABSteppedProgressBar
 
 
 
-class ViewController: UIViewController  {
+class ViewController: UIViewController, UIGestureRecognizerDelegate  {
     
     private var halfCircularProgress: KYCircularProgress!
     private var progress: Double = 0.0
@@ -26,9 +26,11 @@ class ViewController: UIViewController  {
     private var hoursCounter1: NSTimer!
     private var hoursCounter2: NSTimer!
     
+    private var forceTouch = false
+    
     private var alarmSound: NSURL!
     private var audioPlayer: AVAudioPlayer!
-        
+    
     //the start and end angle of arc where the progress bar should be stopped
     private var startAngle: Double = 0
     private var endAngle: Double = 0
@@ -64,7 +66,7 @@ class ViewController: UIViewController  {
         
         if traitCollection.forceTouchCapability == UIForceTouchCapability.Available {
             
-            ForceValue.text = "May the Force Be with YOu"
+            forceTouch = true
             
         }
         
@@ -121,7 +123,6 @@ class ViewController: UIViewController  {
     
     
     
-    
     private func configureAudio() {
         alarmSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("alarm", ofType: "wav")!)
         audioPlayer = AVAudioPlayer()
@@ -141,7 +142,7 @@ class ViewController: UIViewController  {
     }
     private func configureButton() {
         
-
+        
         ForceTester = UIButton.init(frame: CGRectMake(self.halfCircularProgress.frame.origin.x + self.halfCircularProgress.frame.width/4, self.halfCircularProgress.frame.origin.y + self.halfCircularProgress.frame.height, self.halfCircularProgress.frame.width/2, self.halfCircularProgress.frame.height/2))
         
         ForceTester.setTitle("Press Here", forState: UIControlState.Normal)
@@ -260,18 +261,18 @@ class ViewController: UIViewController  {
             let mode = timeString.componentsSeparatedByString(":")[1].componentsSeparatedByString(" ")[1]
             if hours == self.currentAlarm.getHours() && minutes == self.currentAlarm.getMinutes() && mode == self.currentAlarm.getMode() && self.alarmOn == 1 {
                 
-//                self.alarmOn = 0
-//                
-//                let alert = UIAlertController (title: "Alarm Time", message: "Wakey Wakey!!", preferredStyle: UIAlertControllerStyle.Alert)
-//                
-//                
-//                
-//                
-//                alert.addAction(UIAlertAction(title: "Shut Up", style: UIAlertActionStyle.Cancel, handler: { (UIAlertAction) -> Void in
-//                    
-//                    self.audioPlayer.stop()
-//                    
-//                }))
+                //                self.alarmOn = 0
+                //
+                //                let alert = UIAlertController (title: "Alarm Time", message: "Wakey Wakey!!", preferredStyle: UIAlertControllerStyle.Alert)
+                //
+                //
+                //
+                //
+                //                alert.addAction(UIAlertAction(title: "Shut Up", style: UIAlertActionStyle.Cancel, handler: { (UIAlertAction) -> Void in
+                //
+                //                    self.audioPlayer.stop()
+                //
+                //                }))
                 
                 if !self.audioPlayer.playing {
                     self.audioPlayer.play()
@@ -279,8 +280,8 @@ class ViewController: UIViewController  {
                 dispatch_async(dispatch_get_main_queue(), {
                     
                     
-//                    self.presentViewController(alert, animated: true, completion: nil)
-//                    self.audioPlayer.play()
+                    //                    self.presentViewController(alert, animated: true, completion: nil)
+                    //                    self.audioPlayer.play()
                     
                     
                     
@@ -289,12 +290,12 @@ class ViewController: UIViewController  {
                         self.stepProgress.currentIndex = self.stepProgress.currentIndex + 1
                     } else if self.stepProgress.currentIndex >= 3  {
                         
-                      //  self.alarmOn = 0
+                        //  self.alarmOn = 0
                         self.switchOffAlarm()
-
+                        
                         
                     }
-
+                    
                     
                     
                     
@@ -469,7 +470,7 @@ class ViewController: UIViewController  {
                 
                 print("alarm is : \(stopTouches)")
                 if alarmOn == 0 {
-                    if touch.force > 6.666 && stopTouches == 0 {
+                    if (touch.force > 6.666 && stopTouches == 0) || forceTouch == false {
                         
                         stopTouches = 1
                         
@@ -501,7 +502,7 @@ class ViewController: UIViewController  {
                                 self.setUpPlayer()
                                 self.stepProgress.hidden = false
                                 self.stepProgress.userInteractionEnabled = false
-
+                                
                                 
                                 
                                 
@@ -513,8 +514,12 @@ class ViewController: UIViewController  {
                     
                 } else {
                     
-                    ForceValue.text = "\(touch.force)"
-                    updateProgress(touch.force)
+                    if forceTouch {
+                        ForceValue.text = "\(touch.force)"
+                        updateProgress(touch.force)
+                    } else {
+                        self.halfCircularProgress.progress += 0.01
+                    }
                     
                     
                     
@@ -532,9 +537,10 @@ class ViewController: UIViewController  {
         self.view.userInteractionEnabled = false
         self.timeDisplayConstraint.constant = 123
         self.halfCircularProgress.removeFromSuperview()
-       // self.ForceTester.removeFromSuperview()
+        // self.ForceTester.removeFromSuperview()
         self.stepProgress.hidden = true
-
+        self.stepProgress.currentIndex = 0
+        
         
         
         
