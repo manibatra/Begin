@@ -30,6 +30,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
     
     private var alarmSound: NSURL!
     private var audioPlayer: AVAudioPlayer!
+    private var stopAlarm = 0
     
     //the start and end angle of arc where the progress bar should be stopped
     private var startAngle: Double = 0
@@ -259,7 +260,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
             let hours = timeString.componentsSeparatedByString(":")[0]
             let minutes = timeString.componentsSeparatedByString(":")[1].componentsSeparatedByString(" ")[0]
             let mode = timeString.componentsSeparatedByString(":")[1].componentsSeparatedByString(" ")[1]
-            if hours == self.currentAlarm.getHours() && minutes == self.currentAlarm.getMinutes() && mode == self.currentAlarm.getMode() && self.alarmOn == 1 {
+            if (hours == self.currentAlarm.getHours() && minutes == self.currentAlarm.getMinutes() && mode == self.currentAlarm.getMode() && self.alarmOn == 1) || self.stopAlarm == 1 {
                 
                 //                self.alarmOn = 0
                 //
@@ -273,6 +274,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
                 //                    self.audioPlayer.stop()
                 //
                 //                }))
+                
+                self.stopAlarm = 1
                 
                 if !self.audioPlayer.playing {
                     self.audioPlayer.play()
@@ -291,6 +294,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
                     } else if self.stepProgress.currentIndex >= 3  {
                         
                         //  self.alarmOn = 0
+                        self.stopAlarm = 0
                         self.switchOffAlarm()
                         
                         
