@@ -86,6 +86,14 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
             }
         }
         
+        do {
+        
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+        }
+        catch {
+            
+        }
+        
         
         configureHalfCircularProgress()
         //configureButton()
@@ -293,8 +301,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
                         self.stepProgress.currentIndex = self.stepProgress.currentIndex + 1
                     } else if self.stepProgress.currentIndex >= 3  {
                         
-                        //  self.alarmOn = 0
-                        self.stopAlarm = 0
                         self.switchOffAlarm()
                         
                         
@@ -550,6 +556,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
         // self.ForceTester.removeFromSuperview()
         self.stepProgress.hidden = true
         self.stepProgress.currentIndex = 0
+        self.audioPlayer.stop()
+        self.alarmOn = 0
+        self.stopAlarm = 0
         
         
         
@@ -561,11 +570,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
             
             }, completion: { (Bool) -> Void in
                 
-                self.alarmOn = 0
                 self.view.userInteractionEnabled = true
                 self.touchAboveView.userInteractionEnabled = true
                 self.touchBelowView.userInteractionEnabled = true
-                self.audioPlayer.stop()
         })
         
     }
