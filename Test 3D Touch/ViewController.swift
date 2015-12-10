@@ -63,7 +63,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.view.backgroundColor = UIColor.init(red: 0.84, green:0.03, blue:0.03, alpha:1.0)
+        self.view.backgroundColor = UIColor.init(red: 239/255.0, green:71/255.0, blue:111/255.0, alpha:1.0)
         
         if traitCollection.forceTouchCapability == UIForceTouchCapability.Available {
             
@@ -74,6 +74,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
         ForceValue.hidden = true
         
         stepProgress.hidden = true
+        stepProgress.backgroundShapeColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.2)
         
         currentAlarm = Alarm.init(hours: "12", minutes: "00", mode: "AM")
         timeDisplayHours.text = currentAlarm.getHours()
@@ -157,7 +158,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
         ForceTester.setTitle("Press Here", forState: UIControlState.Normal)
         ForceTester.layer.cornerRadius = 20
         ForceTester.titleLabel!.textAlignment = NSTextAlignment.Center
-        ForceTester.backgroundColor = UIColor.init(red: 0.84, green:0.03, blue:0.03, alpha:1.0)
+        ForceTester.backgroundColor =  UIColor.init(red: 239/255.0, green:71/255.0, blue:111/255.0, alpha:1.0)
+
         ForceTester.userInteractionEnabled = false
     }
     
@@ -496,13 +498,13 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
                         self.touchBelowView.userInteractionEnabled = false
                         
                         self.view.userInteractionEnabled = false
-                        self.view.backgroundColor = UIColor.init(red: 0.05, green:0.68, blue:0.23, alpha:1.0)
+                        self.view.backgroundColor = UIColor.init(red: 6/255.0, green:214/255.0, blue:127/255.0, alpha:1.0)
                         
                         
                         currentAlarm.setHours(timeDisplayHours.text!)
                         currentAlarm.setMinutes(timeDisplayMinutes.text!)
                         currentAlarm.setMode(timeDisplayMode.text!)
-                        self.timeDisplayConstraint.constant = self.timeDisplayConstraint.constant + 300
+                        self.timeDisplayConstraint.constant = self.timeDisplayConstraint.constant + 325
                         
                         
                         UIView.animateWithDuration(1.0, delay: 0.0, options: [.CurveEaseInOut], animations: { () -> Void in
@@ -563,7 +565,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
         
         
         
-        self.view.backgroundColor = UIColor.init(red: 0.84, green:0.03, blue:0.03, alpha:1.0)
+        self.view.backgroundColor = UIColor.init(red: 239/255.0, green:71/255.0, blue:111/255.0, alpha:1.0)
         UIView.animateWithDuration(2.0, delay: 0.1, options: [.CurveEaseInOut], animations: { () -> Void in
             
             self.view.layoutIfNeeded()
