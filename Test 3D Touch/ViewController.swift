@@ -341,8 +341,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, AVAudioPlay
                     //                    self.audioPlayer.play()
                     
                     
+                    print("Checking : \(self.progress)")
                     
-                    if self.progress >= 0.74 && self.progress <= 0.78 && self.stepProgress.currentIndex < 3 {
+                    if self.progress >= 0.74 && self.progress <= 0.78 && self.stepProgress.currentIndex < 3  {
                         self.stepProgress.userInteractionEnabled = true
                         self.stepProgress.currentIndex = self.stepProgress.currentIndex + 1
                     } else if self.stepProgress.currentIndex >= 3  {
@@ -530,7 +531,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, AVAudioPlay
                 
             } else if !CGRectContainsPoint(CGRectMake(touchAboveView.frame.origin.x, touchAboveView.frame.origin.y, touchAboveView.frame.width, touchAboveView.frame.height + timeDisplayView.frame.height + touchBelowView.frame.height), touchPoint) || alarmOn == 1 {
                 
-                print("alarm is : \(stopTouches)")
+                print("alarm is : \(self.alarmOn)")
                 if alarmOn == 0 {
                     if (touch.force > 6.666 && stopTouches == 0) || forceTouch == false {
                         
@@ -581,6 +582,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, AVAudioPlay
                         updateProgress(touch.force)
                     } else {
                         self.halfCircularProgress.progress += 0.01
+                        self.progress = self.halfCircularProgress.progress
                     }
                     
                     
