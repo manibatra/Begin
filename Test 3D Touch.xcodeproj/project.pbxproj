@@ -16,6 +16,7 @@
 		60050E851BEB055400DAC93A /* Test_3D_TouchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60050E841BEB055400DAC93A /* Test_3D_TouchUITests.swift */; };
 		602A18511BFD952A008F2B51 /* alarm.wav in Resources */ = {isa = PBXBuildFile; fileRef = 602A18501BFD952A008F2B51 /* alarm.wav */; };
 		606A7B1A1BF06DCC00ED4E5A /* AlarmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606A7B191BF06DCC00ED4E5A /* AlarmObject.swift */; };
+		60C2F46C1C1BE6E700073CB6 /* silence.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60C2F46B1C1BE6E700073CB6 /* silence.wav */; };
 		F15E8494EF9505E05C08C7C5 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF07842EB1F68BA72CC061F /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		60050E861BEB055400DAC93A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		602A18501BFD952A008F2B51 /* alarm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = alarm.wav; sourceTree = "<group>"; };
 		606A7B191BF06DCC00ED4E5A /* AlarmObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmObject.swift; sourceTree = "<group>"; };
+		60C2F46B1C1BE6E700073CB6 /* silence.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = silence.wav; sourceTree = "<group>"; };
 		7CF07842EB1F68BA72CC061F /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFCBD7B6C74D3D70A45C1D39 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				602A18501BFD952A008F2B51 /* alarm.wav */,
+				60C2F46B1C1BE6E700073CB6 /* silence.wav */,
 				60050E641BEB055400DAC93A /* AppDelegate.swift */,
 				60050E661BEB055400DAC93A /* ViewController.swift */,
 				60050E681BEB055400DAC93A /* Main.storyboard */,
@@ -266,6 +269,7 @@
 				60050E6F1BEB055400DAC93A /* LaunchScreen.storyboard in Resources */,
 				602A18511BFD952A008F2B51 /* alarm.wav in Resources */,
 				60050E6C1BEB055400DAC93A /* Assets.xcassets in Resources */,
+				60C2F46C1C1BE6E700073CB6 /* silence.wav in Resources */,
 				60050E6A1BEB055400DAC93A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,7 +14,7 @@ import ABSteppedProgressBar
 
 
 
-class ViewController: UIViewController, UIGestureRecognizerDelegate  {
+class ViewController: UIViewController, UIGestureRecognizerDelegate, AVAudioPlayerDelegate  {
     
     private var halfCircularProgress: KYCircularProgress!
     private var progress: Double = 0.0
@@ -29,7 +29,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
     private var forceTouch = false
     
     private var alarmSound: NSURL!
+    private var silentSound: NSURL!
     private var audioPlayer: AVAudioPlayer!
+    private var silentPlayer: AVAudioPlayer!
+
     private var stopAlarm = 0
     
     //the start and end angle of arc where the progress bar should be stopped
@@ -99,6 +102,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
         configureHalfCircularProgress()
         //configureButton()
         configureAudio()
+        self.setUpPlayer()
+        self.silentPlayer.play()
         updateProgress(0)
         
         
@@ -131,16 +136,22 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
         
     }
     
+
+    
     
     
     private func configureAudio() {
         alarmSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("alarm", ofType: "wav")!)
+        silentSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("silence", ofType: "wav")!)
+        
         audioPlayer = AVAudioPlayer()
+        silentPlayer = AVAudioPlayer()
     }
     
     private func setUpPlayer() {
         do {
             self.audioPlayer = try AVAudioPlayer(contentsOfURL: self.alarmSound)
+            self.silentPlayer = try AVAudioPlayer(contentsOfURL: self.silentSound)
         }
             
         catch {
@@ -149,6 +160,37 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
             
         }
         audioPlayer.prepareToPlay()
+        self.silentPlayer.prepareToPlay()
+        self.silentPlayer.delegate = self
+    }
+    
+    private func configureAVAudioSession() {
+        let session = AVAudioSession.sharedInstance()
+        
+        
+        do {
+            try session.setCategory(AVAudioSessionCategoryPlayback)
+            try session.overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
+        }
+        
+        catch {
+            print("audio seession override failure")
+        }
+        
+        do {
+           try session.setActive(true)
+        }
+        
+        catch {
+            print("audio session active")
+        }
+        
+        
+        
+    }
+    
+    func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
+        self.silentPlayer.play()
     }
     private func configureButton() {
         
@@ -286,6 +328,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
                 //                }))
                 
                 self.stopAlarm = 1
+                self.silentPlayer.stop()
+                self.silentPlayer.delegate = nil
                 
                 if !self.audioPlayer.playing {
                     self.audioPlayer.play()
@@ -517,7 +561,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
                                 self.view.userInteractionEnabled = true
                                 self.view.addSubview(self.halfCircularProgress)
                                 //self.view.addSubview(self.ForceTester)
-                                self.setUpPlayer()
+                                //self.setUpPlayer()
                                 self.stepProgress.hidden = false
                                 self.stepProgress.userInteractionEnabled = false
                                 
@@ -561,6 +605,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate  {
         self.audioPlayer.stop()
         self.alarmOn = 0
         self.stopAlarm = 0
+        self.silentPlayer.delegate = self
+        self.silentPlayer.play()
         
         
         
