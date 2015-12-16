@@ -216,10 +216,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, AVAudioPlay
     
     private func configureHalfCircularProgress() {
         
-        let progressFrame = CGRectMake(0, timeDisplayView.frame.origin.y - 100, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)/4)
+        let progressFrame = CGRectMake(0, self.view.frame.height/2, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)/4)
         halfCircularProgress = KYCircularProgress(frame: progressFrame, showProgressGuide: true)
         
-        let center = CGPoint(x: view.frame.midX, y: 140.0)
+        let center = CGPoint(x: view.frame.midX, y: 160.0)
         halfCircularProgress.path = UIBezierPath(arcCenter: center, radius: CGFloat(CGRectGetWidth(halfCircularProgress.frame)/3), startAngle: CGFloat(M_PI), endAngle: CGFloat(0.0), clockwise: true)
         
         halfCircularProgress.colors = [UIColor(rgba: 0xA6E39DAA), UIColor(rgba: 0xAEC1E3AA), UIColor(rgba: 0xAEC1E3AA), UIColor(rgba: 0xF3C0ABAA)]
@@ -236,6 +236,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, AVAudioPlay
         textLabel.textColor = UIColor.greenColor()
         textLabel.alpha = 0.3
         halfCircularProgress.addSubview(textLabel)
+        textLabel.hidden = true
         self.configureStopZone()
         
         let shapeLayer = CAShapeLayer()
@@ -558,7 +559,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, AVAudioPlay
                         currentAlarm.setHours(timeDisplayHours.text!)
                         currentAlarm.setMinutes(timeDisplayMinutes.text!)
                         currentAlarm.setMode(timeDisplayMode.text!)
-                        self.timeDisplayConstraint.constant = self.timeDisplayConstraint.constant + 325
+                        
+                        if alarmOn == 0 {
+                            self.timeDisplayConstraint.constant = self.timeDisplayConstraint.constant + 325
+                            self.alarmOn = 1
+
+                        }
                         
                         
                         UIView.animateWithDuration(1.0, delay: 0.0, options: [.CurveEaseInOut], animations: { () -> Void in
@@ -567,7 +573,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, AVAudioPlay
                             
                             }, completion: { (Bool) -> Void in
                                 
-                                self.alarmOn = 1
                                 self.view.userInteractionEnabled = true
                                 self.view.addSubview(self.halfCircularProgress)
                                 //self.view.addSubview(self.ForceTester)
