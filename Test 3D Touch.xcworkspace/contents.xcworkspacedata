@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Test 3D Touch.xcodeproj">
+      location = "group:/Users/manibatra/Desktop/projects_on_github/Test 3D Touch/Begin.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

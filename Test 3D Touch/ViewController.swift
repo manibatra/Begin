@@ -63,6 +63,14 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, AVAudioPlay
     
     @IBOutlet weak var timeDisplayConstraint: NSLayoutConstraint!
     
+    override func viewDidAppear(animated: Bool) {
+        self.becomeFirstResponder()
+    }
+    
+    override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -101,6 +109,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, AVAudioPlay
         
         configureHalfCircularProgress()
         //configureButton()
+        configureAVAudioSession()
         configureAudio()
         self.setUpPlayer()
         self.silentPlayer.play()
@@ -701,6 +710,17 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, AVAudioPlay
         if traitCollection.forceTouchCapability != UIForceTouchCapability.Available {
             
             ForceValue.text = "The Empire Strikes Back"
+        }
+    }
+    
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
+        if motion == UIEventSubtype.MotionShake {
+            
+            if alarmOn == 1 && self.stopAlarm == 0 {
+                
+                switchOffAlarm()
+            }
+            
         }
     }
     
