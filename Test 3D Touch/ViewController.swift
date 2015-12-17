@@ -26,6 +26,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, AVAudioPlay
     private var hoursCounter1: NSTimer!
     private var hoursCounter2: NSTimer!
     
+    private var overlayView: UIView!
+    @IBOutlet weak var helpButton: UIButton!
+    
     private var forceTouch = false
     
     private var alarmSound: NSURL!
@@ -353,7 +356,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, AVAudioPlay
                     
                     print("Checking : \(self.progress)")
                     
-                    if self.progress >= 0.74 && self.progress <= 0.78 && self.stepProgress.currentIndex < 3  {
+                    if self.progress >= 0.71 && self.progress <= 0.75 && self.stepProgress.currentIndex < 3  {
                         self.stepProgress.userInteractionEnabled = true
                         self.stepProgress.currentIndex = self.stepProgress.currentIndex + 1
                     } else if self.stepProgress.currentIndex >= 3  {
@@ -398,7 +401,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, AVAudioPlay
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
-        print("the touch has ended")
+        print("the touch has ended : \(forceTouch)")
         stopCounters()
         //
         //
@@ -406,6 +409,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, AVAudioPlay
         self.progress = 0.0
         if forceTouch {
             updateProgress(0)
+            self.stepProgress.currentIndex = 0
         }
         stopTouches = 0
         
@@ -727,6 +731,63 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, AVAudioPlay
             }
             
         }
+    }
+    
+    @IBAction func showHelp(sender: UIButton) {
+        
+//        //overlay view
+        let overlayFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
+        
+        overlayView = UIView.init(frame: overlayFrame)
+        
+        overlayView.tag = 100
+        
+        overlayView.backgroundColor = UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.3)
+        
+        //overlay for help image when alarm is not set
+        let imageFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
+
+        
+        let alarmOffOverlay = UIImageView.init(frame: imageFrame)
+        
+        alarmOffOverlay.userInteractionEnabled = true
+        
+        let alarmOffOverlayImage = UIImage(named: "alarm_off_overlay.png") as UIImage?
+        
+        alarmOffOverlay.image = alarmOffOverlayImage
+        
+        alarmOffOverlay.tag = 101
+        
+        
+        //close button
+        let closeOverlayButton = UIButton.init(frame: CGRectMake(self.helpButton.frame.origin.x, self.helpButton.frame.origin.y, 32, 32))
+
+        closeOverlayButton.addTarget(self, action: "closeHelp:", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        let image = UIImage(named: "close_icon.png") as UIImage?
+        
+        closeOverlayButton.setImage(image, forState: .Normal)
+        
+        //adding the subviews
+        alarmOffOverlay.addSubview(closeOverlayButton)
+        
+        overlayView.addSubview(alarmOffOverlay)
+        
+        
+        sender.hidden = true
+        
+        self.view.addSubview(overlayView)
+        
+
+    }
+    
+   func closeHelp(sender: UIButton!) {
+    
+        helpButton.hidden = false
+        //self.view.viewWithTag(100)?.viewWithTag(101)?.removeFromSuperview()
+        self.view.viewWithTag(100)?.removeFromSuperview()
+
+
     }
     
     
