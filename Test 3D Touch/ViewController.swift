@@ -565,6 +565,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, AVAudioPlay
                         currentAlarm.setMode(timeDisplayMode.text!)
                         
                         if alarmOn == 0 {
+                            closeHelp(nil)
                             self.timeDisplayConstraint.constant = self.timeDisplayConstraint.constant + 325
                             self.alarmOn = 1
 
@@ -752,9 +753,27 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, AVAudioPlay
         
         alarmOffOverlay.userInteractionEnabled = true
         
-        let alarmOffOverlayImage = UIImage(named: "alarm_off_overlay.png") as UIImage?
+        var helpOverlayImage = UIImage!()
         
-        alarmOffOverlay.image = alarmOffOverlayImage
+        if alarmOn == 0 {
+            
+            helpOverlayImage = UIImage(named: "alarm_off_overlay.png") as UIImage?
+
+            
+        } else if forceTouch {
+            
+            helpOverlayImage = UIImage(named: "alarm_on_overlay.png") as UIImage?
+
+            
+        } else {
+            
+            helpOverlayImage = UIImage(named: "alarm_on_overlay_no_force.png") as UIImage?
+
+            
+        }
+        
+        
+        alarmOffOverlay.image = helpOverlayImage
         
         alarmOffOverlay.tag = 101
         
@@ -763,6 +782,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, AVAudioPlay
         let closeOverlayButton = UIButton.init(frame: CGRectMake(self.helpButton.frame.origin.x, self.helpButton.frame.origin.y, 32, 32))
 
         closeOverlayButton.addTarget(self, action: "closeHelp:", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        
         
         let image = UIImage(named: "close_icon.png") as UIImage?
         
