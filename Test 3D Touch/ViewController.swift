@@ -585,6 +585,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, AVAudioPlay
                                 //self.setUpPlayer()
                                 self.stepProgress.hidden = false
                                 self.stepProgress.userInteractionEnabled = false
+                                UIScreen.mainScreen().brightness = 0.1
                                 
                                 
                                 
