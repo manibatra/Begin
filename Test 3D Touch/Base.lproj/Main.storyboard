@@ -211,7 +211,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dLr-mh-erP">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dLr-mh-erP">
                                 <rect key="frame" x="533" y="28" width="37" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="37" id="HNZ-Zx-UhQ"/>
@@ -226,16 +226,16 @@
                         <color key="backgroundColor" red="0.93725490196078431" green="0.27843137254901962" blue="0.43529411764705883" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Ny9-VC-OYj" firstAttribute="top" secondItem="4pQ-va-cBu" secondAttribute="bottom" id="3VJ-RT-gl3"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="dLr-mh-erP" secondAttribute="trailing" constant="8" id="8BU-Zw-5cD"/>
                             <constraint firstItem="DSZ-zv-QMD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AxB-LA-WaI"/>
+                            <constraint firstItem="dLr-mh-erP" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="DoG-Ac-vrv"/>
                             <constraint firstItem="Uea-Xp-csP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="E4x-Dd-2i9"/>
                             <constraint firstItem="Kzf-8p-eE5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="EYX-NQ-W7a"/>
                             <constraint firstAttribute="bottomMargin" secondItem="Ny9-VC-OYj" secondAttribute="bottom" constant="123" id="NFZ-FE-yNb"/>
                             <constraint firstItem="Ny9-VC-OYj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PvF-AH-5l3"/>
-                            <constraint firstItem="dLr-mh-erP" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="TGZ-fE-9xI"/>
                             <constraint firstItem="Uea-Xp-csP" firstAttribute="top" secondItem="Ny9-VC-OYj" secondAttribute="bottom" id="eCA-wc-mDR"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Kzf-8p-eE5" secondAttribute="bottom" constant="43" id="p7U-g4-Pqf"/>
                             <constraint firstItem="4pQ-va-cBu" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tX1-6T-Up5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dLr-mh-erP" secondAttribute="trailing" constant="10" id="vWm-CF-MOk"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

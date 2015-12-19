@@ -407,11 +407,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, AVAudioPlay
         //
         //        self.ForceValue.text = "Return of the Jedi ?"
         self.progress = 0.0
+        updateProgress(0)
         if forceTouch {
             updateProgress(0)
             self.stepProgress.currentIndex = 0
         }
-        stopTouches = 0
+        
         
     }
     
@@ -547,7 +548,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, AVAudioPlay
                 
                 print("alarm is : \(self.alarmOn)")
                 if alarmOn == 0 {
-                    if (touch.force > 6.666 && stopTouches == 0) || forceTouch == false {
+                    if (touch.force > 6.666 && stopTouches == 0) || (forceTouch == false && stopTouches == 0) {
                         
                         stopTouches = 1
                         
@@ -566,7 +567,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, AVAudioPlay
                         
                         if alarmOn == 0 {
                             closeHelp(nil)
-                            self.timeDisplayConstraint.constant = self.timeDisplayConstraint.constant + 325
+                            self.timeDisplayConstraint.constant = self.timeDisplayConstraint.constant + self.view.frame.height/2
                             self.alarmOn = 1
 
                         }
@@ -642,6 +643,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, AVAudioPlay
                 self.view.userInteractionEnabled = true
                 self.touchAboveView.userInteractionEnabled = true
                 self.touchBelowView.userInteractionEnabled = true
+                self.stopTouches = 0
         })
         
     }
@@ -757,7 +759,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, AVAudioPlay
         
         if alarmOn == 0 {
             
-            helpOverlayImage = UIImage(named: "alarm_off_overlay.png") as UIImage?
+            if forceTouch {
+            
+                helpOverlayImage = UIImage(named: "alarm_off_overlay.png") as UIImage?
+            } else {
+                helpOverlayImage = UIImage(named: "alarm_off_overlay_no_force.png") as UIImage?
+            }
 
             
         } else if forceTouch {
