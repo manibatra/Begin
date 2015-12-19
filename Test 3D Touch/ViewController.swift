@@ -9,10 +9,12 @@
 import UIKit
 import KYCircularProgress
 import AVFoundation
+import ABSteppedProgressBar
 
 
 
-class ViewController: UIViewController  {
+
+class ViewController: UIViewController, UIGestureRecognizerDelegate, AVAudioPlayerDelegate  {
     
     private var halfCircularProgress: KYCircularProgress!
     private var progress: Double = 0.0
@@ -24,14 +26,24 @@ class ViewController: UIViewController  {
     private var hoursCounter1: NSTimer!
     private var hoursCounter2: NSTimer!
     
+    private var overlayView: UIView!
+    @IBOutlet weak var helpButton: UIButton!
+    
+    private var forceTouch = false
+    
     private var alarmSound: NSURL!
+    private var silentSound: NSURL!
     private var audioPlayer: AVAudioPlayer!
+    private var silentPlayer: AVAudioPlayer!
+
+    private var stopAlarm = 0
     
     //the start and end angle of arc where the progress bar should be stopped
     private var startAngle: Double = 0
     private var endAngle: Double = 0
     
     
+    @IBOutlet weak var stepProgress: ABSteppedProgressBar!
     
     private var ForceTester: UIButton!
     @IBOutlet weak var ForceValue: UILabel!
@@ -51,21 +63,32 @@ class ViewController: UIViewController  {
     @IBOutlet weak var minutesTouchBelow: UILabel!
     @IBOutlet weak var touchBelowView: UIStackView!
     
-
+    
     @IBOutlet weak var timeDisplayConstraint: NSLayoutConstraint!
+    
+    override func viewDidAppear(animated: Bool) {
+        self.becomeFirstResponder()
+    }
+    
+    override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.view.backgroundColor = UIColor.init(red: 0.84, green:0.03, blue:0.03, alpha:1.0)
+        self.view.backgroundColor = UIColor.init(red: 239/255.0, green:71/255.0, blue:111/255.0, alpha:1.0)
         
         if traitCollection.forceTouchCapability == UIForceTouchCapability.Available {
             
-            ForceValue.text = "May the Force Be with YOu"
+            forceTouch = true
             
         }
         
         ForceValue.hidden = true
+        
+        stepProgress.hidden = true
+        stepProgress.backgroundShapeColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.2)
         
         currentAlarm = Alarm.init(hours: "12", minutes: "00", mode: "AM")
         timeDisplayHours.text = currentAlarm.getHours()
@@ -77,11 +100,22 @@ class ViewController: UIViewController  {
                 timer.fire()
             }
         }
-
+        
+        do {
+        
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+        }
+        catch {
+            
+        }
+        
         
         configureHalfCircularProgress()
-        configureButton()
+        //configureButton()
+        configureAVAudioSession()
         configureAudio()
+        self.setUpPlayer()
+        self.silentPlayer.play()
         updateProgress(0)
         
         
@@ -117,39 +151,78 @@ class ViewController: UIViewController  {
 
     
     
+    
     private func configureAudio() {
         alarmSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("alarm", ofType: "wav")!)
+        silentSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("silence", ofType: "wav")!)
+        
         audioPlayer = AVAudioPlayer()
+        silentPlayer = AVAudioPlayer()
     }
     
     private func setUpPlayer() {
         do {
             self.audioPlayer = try AVAudioPlayer(contentsOfURL: self.alarmSound)
+            self.silentPlayer = try AVAudioPlayer(contentsOfURL: self.silentSound)
         }
-        
+            
         catch {
             
             print("Error getting the audio file")
             
         }
         audioPlayer.prepareToPlay()
+        self.silentPlayer.prepareToPlay()
+        self.silentPlayer.delegate = self
+    }
+    
+    private func configureAVAudioSession() {
+        let session = AVAudioSession.sharedInstance()
+        
+        
+        do {
+            try session.setCategory(AVAudioSessionCategoryPlayback)
+            try session.overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
+        }
+        
+        catch {
+            print("audio seession override failure")
+        }
+        
+        do {
+           try session.setActive(true)
+        }
+        
+        catch {
+            print("audio session active")
+        }
+        
+        
+        
+    }
+    
+    func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
+        self.silentPlayer.play()
     }
     private func configureButton() {
+        
+        
         ForceTester = UIButton.init(frame: CGRectMake(self.halfCircularProgress.frame.origin.x + self.halfCircularProgress.frame.width/4, self.halfCircularProgress.frame.origin.y + self.halfCircularProgress.frame.height, self.halfCircularProgress.frame.width/2, self.halfCircularProgress.frame.height/2))
         
         ForceTester.setTitle("Press Here", forState: UIControlState.Normal)
         ForceTester.layer.cornerRadius = 20
         ForceTester.titleLabel!.textAlignment = NSTextAlignment.Center
-        ForceTester.backgroundColor = UIColor.init(red: 0.84, green:0.03, blue:0.03, alpha:1.0)
+        ForceTester.backgroundColor =  UIColor.init(red: 239/255.0, green:71/255.0, blue:111/255.0, alpha:1.0)
+
         ForceTester.userInteractionEnabled = false
     }
     
     private func configureHalfCircularProgress() {
         
-        let progressFrame = CGRectMake(0, timeDisplayView.frame.origin.y - 100, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)/4)
+        let progressFrame = CGRectMake(0, self.view.frame.height/2, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)/4)
         halfCircularProgress = KYCircularProgress(frame: progressFrame, showProgressGuide: true)
         
-        let center = CGPoint(x: view.frame.midX, y: 140.0)
+        let center = CGPoint(x: view.frame.midX, y: 160.0)
         halfCircularProgress.path = UIBezierPath(arcCenter: center, radius: CGFloat(CGRectGetWidth(halfCircularProgress.frame)/3), startAngle: CGFloat(M_PI), endAngle: CGFloat(0.0), clockwise: true)
         
         halfCircularProgress.colors = [UIColor(rgba: 0xA6E39DAA), UIColor(rgba: 0xAEC1E3AA), UIColor(rgba: 0xAEC1E3AA), UIColor(rgba: 0xF3C0ABAA)]
@@ -166,6 +239,7 @@ class ViewController: UIViewController  {
         textLabel.textColor = UIColor.greenColor()
         textLabel.alpha = 0.3
         halfCircularProgress.addSubview(textLabel)
+        textLabel.hidden = true
         self.configureStopZone()
         
         let shapeLayer = CAShapeLayer()
@@ -187,6 +261,7 @@ class ViewController: UIViewController  {
         let forceProgressFactor = 0.150015
         progress = Double(force) * forceProgressFactor
         halfCircularProgress.progress = Double(self.progress)
+        
         
         
         
@@ -250,27 +325,49 @@ class ViewController: UIViewController  {
             let hours = timeString.componentsSeparatedByString(":")[0]
             let minutes = timeString.componentsSeparatedByString(":")[1].componentsSeparatedByString(" ")[0]
             let mode = timeString.componentsSeparatedByString(":")[1].componentsSeparatedByString(" ")[1]
-            if hours == self.currentAlarm.getHours() && minutes == self.currentAlarm.getMinutes() && mode == self.currentAlarm.getMode() && self.alarmOn == 1 {
+            if (hours == self.currentAlarm.getHours() && minutes == self.currentAlarm.getMinutes() && mode == self.currentAlarm.getMode() && self.alarmOn == 1) || self.stopAlarm == 1 {
                 
-                self.alarmOn = 0
+                //                self.alarmOn = 0
+                //
+                //                let alert = UIAlertController (title: "Alarm Time", message: "Wakey Wakey!!", preferredStyle: UIAlertControllerStyle.Alert)
+                //
+                //
+                //
+                //
+                //                alert.addAction(UIAlertAction(title: "Shut Up", style: UIAlertActionStyle.Cancel, handler: { (UIAlertAction) -> Void in
+                //
+                //                    self.audioPlayer.stop()
+                //
+                //                }))
                 
-                let alert = UIAlertController (title: "Alarm Time", message: "Wakey Wakey!!", preferredStyle: UIAlertControllerStyle.Alert)
+                self.stopAlarm = 1
+                self.silentPlayer.stop()
+                self.silentPlayer.delegate = nil
                 
-                
-                
-                
-                alert.addAction(UIAlertAction(title: "Shut Up", style: UIAlertActionStyle.Cancel, handler: { (UIAlertAction) -> Void in
-                    
-                    self.audioPlayer.stop()
-                    
-                }))
-                
-                
+                if !self.audioPlayer.playing {
+                    self.audioPlayer.play()
+                }
                 dispatch_async(dispatch_get_main_queue(), {
                     
                     
-                    self.presentViewController(alert, animated: true, completion: nil)
-                    self.audioPlayer.play()
+                    //                    self.presentViewController(alert, animated: true, completion: nil)
+                    //                    self.audioPlayer.play()
+                    
+                    
+                    print("Checking : \(self.progress)")
+                    
+                    if self.progress >= 0.71 && self.progress <= 0.75 && self.stepProgress.currentIndex < 3  {
+                        self.stepProgress.userInteractionEnabled = true
+                        self.stepProgress.currentIndex = self.stepProgress.currentIndex + 1
+                    } else if self.stepProgress.currentIndex >= 3  {
+                        
+                        self.switchOffAlarm()
+                        
+                        
+                    }
+                    
+                    
+                    
                     
                     
                 })
@@ -299,23 +396,31 @@ class ViewController: UIViewController  {
             hoursCounter2.invalidate()
             hoursCounter2 = nil
         }
-
+        
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
-        print("the touch has ended")
+        print("the touch has ended : \(forceTouch)")
         stopCounters()
         //
-//        
-//        self.ForceValue.text = "Return of the Jedi ?"
+        //
+        //        self.ForceValue.text = "Return of the Jedi ?"
         self.progress = 0.0
         updateProgress(0)
-        stopTouches = 0
+        if forceTouch {
+            updateProgress(0)
+            self.stepProgress.currentIndex = 0
+        }
+        
         
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        if !forceTouch {
+            updateProgress(0)
+        }
         
         
         for touch in touches {
@@ -401,12 +506,7 @@ class ViewController: UIViewController  {
             //print("the force in this one is : \(Double(touch.force))")
             
             
-            if CGRectContainsPoint(ForceTester.frame, touchPoint) && alarmOn == 1 {
-                
-                ForceValue.text = "\(touch.force)"
-                updateProgress(touch.force)
-                
-            } else if (CGRectContainsPoint( CGRectMake(modeTouchBelow.frame.origin.x + touchBelowView.frame.origin.x, modeTouchBelow.frame.origin.y + touchBelowView.frame.origin.y, modeTouchBelow.frame.width, modeTouchBelow.frame.height), touchPoint) || CGRectContainsPoint( CGRectMake(modeTouchAbove.frame.origin.x + touchAboveView.frame.origin.x, modeTouchAbove.frame.origin.y + touchAboveView.frame.origin.y, modeTouchAbove.frame.width, modeTouchAbove.frame.height), touchPoint)) && alarmOn == 0 && stopTouches == 0 {
+            if (CGRectContainsPoint( CGRectMake(modeTouchBelow.frame.origin.x + touchBelowView.frame.origin.x, modeTouchBelow.frame.origin.y + touchBelowView.frame.origin.y, modeTouchBelow.frame.width, modeTouchBelow.frame.height), touchPoint) || CGRectContainsPoint( CGRectMake(modeTouchAbove.frame.origin.x + touchAboveView.frame.origin.x, modeTouchAbove.frame.origin.y + touchAboveView.frame.origin.y, modeTouchAbove.frame.width, modeTouchAbove.frame.height), touchPoint)) && alarmOn == 0 && stopTouches == 0 {
                 
                 changeTime(touch.force, selector: "changeMode", touchedLabel: nil)
                 
@@ -446,25 +546,32 @@ class ViewController: UIViewController  {
                 
             } else if !CGRectContainsPoint(CGRectMake(touchAboveView.frame.origin.x, touchAboveView.frame.origin.y, touchAboveView.frame.width, touchAboveView.frame.height + timeDisplayView.frame.height + touchBelowView.frame.height), touchPoint) || alarmOn == 1 {
                 
-                print("alarm is : \(stopTouches)")
-                if touch.force > 6.666 && stopTouches == 0 {
-                    
-                    stopTouches = 1
-                    
-                    if alarmOn == 0 {
+                print("alarm is : \(self.alarmOn)")
+                if alarmOn == 0 {
+                    if (touch.force > 6.666 && stopTouches == 0) || (forceTouch == false && stopTouches == 0) {
+                        
+                        stopTouches = 1
+                        
+                        
                         stopCounters()
                         self.touchAboveView.userInteractionEnabled = false
                         self.touchBelowView.userInteractionEnabled = false
-
+                        
                         self.view.userInteractionEnabled = false
-                        self.view.backgroundColor = UIColor.init(red: 0.05, green:0.68, blue:0.23, alpha:1.0)
-
+                        self.view.backgroundColor = UIColor.init(red: 6/255.0, green:214/255.0, blue:127/255.0, alpha:1.0)
+                        
                         
                         currentAlarm.setHours(timeDisplayHours.text!)
                         currentAlarm.setMinutes(timeDisplayMinutes.text!)
                         currentAlarm.setMode(timeDisplayMode.text!)
-                        self.timeDisplayConstraint.constant = self.timeDisplayConstraint.constant + 300
+                        
+                        if alarmOn == 0 {
+                            closeHelp(nil)
+                            self.timeDisplayConstraint.constant = self.timeDisplayConstraint.constant + self.view.frame.height/2
+                            self.alarmOn = 1
 
+                        }
+                        
                         
                         UIView.animateWithDuration(1.0, delay: 0.0, options: [.CurveEaseInOut], animations: { () -> Void in
                             
@@ -472,51 +579,74 @@ class ViewController: UIViewController  {
                             
                             }, completion: { (Bool) -> Void in
                                 
-                                self.alarmOn = 1
                                 self.view.userInteractionEnabled = true
                                 self.view.addSubview(self.halfCircularProgress)
-                                self.view.addSubview(self.ForceTester)
-                                self.setUpPlayer()
-
-                              
+                                //self.view.addSubview(self.ForceTester)
+                                //self.setUpPlayer()
+                                self.stepProgress.hidden = false
+                                self.stepProgress.userInteractionEnabled = false
+                                UIScreen.mainScreen().brightness = 0.1
+                                
+                                
+                                
                                 
                         })
-                       break
                         
-                    } else {
-                        self.view.userInteractionEnabled = false
-                        self.timeDisplayConstraint.constant = self.timeDisplayConstraint.constant - 300
-                        self.halfCircularProgress.removeFromSuperview()
-                        self.ForceTester.removeFromSuperview()
-
-
-
-                        self.view.backgroundColor = UIColor.init(red: 0.84, green:0.03, blue:0.03, alpha:1.0)
-                        UIView.animateWithDuration(2.0, delay: 0.1, options: [.CurveEaseInOut], animations: { () -> Void in
-                            
-                            self.view.layoutIfNeeded()
-                            
-                            }, completion: { (Bool) -> Void in
-                                
-                                self.alarmOn = 0
-                                self.view.userInteractionEnabled = true
-                                self.touchAboveView.userInteractionEnabled = true
-                                self.touchBelowView.userInteractionEnabled = true
-                                                        })
-
-                        
-                      
-
                         break
                         
-                        
                     }
+                    
+                } else {
+                    
+                    if forceTouch {
+                        ForceValue.text = "\(touch.force)"
+                        updateProgress(touch.force)
+                    } else {
+                        self.halfCircularProgress.progress += 0.01
+                        self.progress = self.halfCircularProgress.progress
+                    }
+                    
+                    
+                    
                 }
+                
                 
             }
             
             
         }
+        
+    }
+    
+    func switchOffAlarm() {
+        self.view.userInteractionEnabled = false
+        self.timeDisplayConstraint.constant = 123
+        self.halfCircularProgress.removeFromSuperview()
+        // self.ForceTester.removeFromSuperview()
+        self.stepProgress.hidden = true
+        self.stepProgress.currentIndex = 0
+        self.audioPlayer.stop()
+        self.alarmOn = 0
+        self.stopAlarm = 0
+        self.silentPlayer.delegate = self
+        self.silentPlayer.play()
+        
+        
+        
+        
+        self.view.backgroundColor = UIColor.init(red: 239/255.0, green:71/255.0, blue:111/255.0, alpha:1.0)
+        UIView.animateWithDuration(2.0, delay: 0.1, options: [.CurveEaseInOut], animations: { () -> Void in
+            
+            self.view.layoutIfNeeded()
+            
+            }, completion: { (Bool) -> Void in
+                
+                self.view.userInteractionEnabled = true
+                self.touchAboveView.userInteractionEnabled = true
+                self.touchBelowView.userInteractionEnabled = true
+                self.stopTouches = 0
+                UIScreen.mainScreen().brightness = 0.3
+        })
         
     }
     
@@ -595,6 +725,99 @@ class ViewController: UIViewController  {
             
             ForceValue.text = "The Empire Strikes Back"
         }
+    }
+    
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
+        if motion == UIEventSubtype.MotionShake {
+            
+            if alarmOn == 1 && self.stopAlarm == 0 {
+                
+                switchOffAlarm()
+            }
+            
+        }
+    }
+    
+    @IBAction func showHelp(sender: UIButton) {
+        
+//        //overlay view
+        let overlayFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
+        
+        overlayView = UIView.init(frame: overlayFrame)
+        
+        overlayView.tag = 100
+        
+        overlayView.backgroundColor = UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.3)
+        
+        //overlay for help image when alarm is not set
+        let imageFrame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
+
+        
+        let alarmOffOverlay = UIImageView.init(frame: imageFrame)
+        
+        alarmOffOverlay.userInteractionEnabled = true
+        
+        var helpOverlayImage = UIImage!()
+        
+        if alarmOn == 0 {
+            
+            if forceTouch {
+            
+                helpOverlayImage = UIImage(named: "alarm_off_overlay.png") as UIImage?
+            } else {
+                helpOverlayImage = UIImage(named: "alarm_off_overlay_no_force.png") as UIImage?
+            }
+
+            
+        } else if forceTouch {
+            
+            helpOverlayImage = UIImage(named: "alarm_on_overlay.png") as UIImage?
+
+            
+        } else {
+            
+            helpOverlayImage = UIImage(named: "alarm_on_overlay_no_force.png") as UIImage?
+
+            
+        }
+        
+        
+        alarmOffOverlay.image = helpOverlayImage
+        
+        alarmOffOverlay.tag = 101
+        
+        
+        //close button
+        let closeOverlayButton = UIButton.init(frame: CGRectMake(self.helpButton.frame.origin.x, self.helpButton.frame.origin.y, 32, 32))
+
+        closeOverlayButton.addTarget(self, action: "closeHelp:", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        
+        
+        let image = UIImage(named: "close_icon.png") as UIImage?
+        
+        closeOverlayButton.setImage(image, forState: .Normal)
+        
+        //adding the subviews
+        alarmOffOverlay.addSubview(closeOverlayButton)
+        
+        overlayView.addSubview(alarmOffOverlay)
+        
+        
+        sender.hidden = true
+        
+        self.view.addSubview(overlayView)
+        
+
+    }
+    
+   func closeHelp(sender: UIButton!) {
+    
+        helpButton.hidden = false
+        //self.view.viewWithTag(100)?.viewWithTag(101)?.removeFromSuperview()
+        self.view.viewWithTag(100)?.removeFromSuperview()
+
+
     }
     
     
