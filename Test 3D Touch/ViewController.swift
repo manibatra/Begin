@@ -645,6 +645,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, AVAudioPlay
                 self.touchAboveView.userInteractionEnabled = true
                 self.touchBelowView.userInteractionEnabled = true
                 self.stopTouches = 0
+                UIScreen.mainScreen().brightness = 0.3
         })
         
     }
