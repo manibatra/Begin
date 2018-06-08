@@ -1,6 +1,6 @@
 # Begin
 
-### iOS app developed using Swift to implement 3D touch in an Alarm Clock
+### A minimal iOS app developed using Swift to implement 3D touch in an Alarm Clock
 
 The app had over 150 downloads in its hayday. It is no longer active on the App Store. 
 
